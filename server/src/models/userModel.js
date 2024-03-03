@@ -15,4 +15,15 @@ const setUser = async (user)=>{
   }
 }
 
-export {setUser}
+const getUserEmail = async (email)=>{
+  const getEmailQuery = "SELECT email FROM users WHERE email = $1";
+
+  try {
+    const res = await pool.query(getEmailQuery, [email]);
+    return res
+  } catch (error) {
+    return null;
+  }
+}
+
+export {setUser, getUserEmail}
