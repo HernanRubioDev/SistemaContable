@@ -40,15 +40,15 @@ const loginUser = async (req, res)=>{
         break;
     }
   } catch (error) {
-    console.log(error)
     res.status(500).json({message:"Se a producido un error inesperado. Inténtelo más tarde."})
   }
 }
 
 const logOutUser = async (req, res)=>{
-  const {auth_token} = req.body
+  const {auth_token} = req.params
+  const user_ip = req.connection.remoteAddress
   try {
-    const logout_response = await deleteUserAuth(auth_token);
+    const logout_response = await deleteUserAuth(auth_token, user_ip);
     switch (true) {
       case logout_response.rowCount !==0:
         res.status(200).json({message: "Se cerró sesión correctamente."})

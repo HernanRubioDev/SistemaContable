@@ -55,19 +55,29 @@ const setUserAuth = async (id_user, auth_token, user_ip)=>{
     ) AS user;
 `;
     try {
-    const res = await pool.query(authUserQuery, [auth_token, id_user, user_ip, id_user])
-    return res
+      const authUserRes = await pool.query(authUserQuery, [auth_token, id_user, user_ip, id_user])
+      return authUserRes
   } catch (error) {
-    console.log(error)
     return null;
   }
 }
 
-const deleteUserAuth = async(auth_token) =>{
-  const deleteAuthQuery = "DELETE FROM users_sessions WHERE auth_token = $1"
+const getUserAuth = async (auth_token, user_ip) =>{
+  const userAuthQuery = `SELECT *, to_char(expiration_date, 'YYYY-MM-DD') AS expiration_date FROM users_sessions WHERE auth_token = $1 AND user_ip = $2`
+  
   try {
-    const deletAuthRes = pool.query(deleteAuthQuery, [auth_token]);
-    return deletAuthRes
+    const userAuthRes = await pool.query(userAuthQuery, [auth_token, user_ip])
+    return userAuthRes
+  } catch (error) {
+    return null
+  }
+}
+
+const deleteUserAuth = async(auth_token, user_ip) =>{
+  const deleteAuthQuery = "DELETE FROM users_sessions WHERE auth_token = $1 AND user_ip = $2"
+  try {
+    const deleteAuthRes = await pool.query(deleteAuthQuery, [auth_token, user_ip]);
+    return deleteAuthRes;
   } catch (error) {
     return null
   }
@@ -77,12 +87,12 @@ const getUserEmail = async (email)=>{
   const getEmailQuery = "SELECT * FROM users WHERE email = $1";
 
   try {
-    const res = await pool.query(getEmailQuery, [email]);
-    return res
+    const getEmailRes = await pool.query(getEmailQuery, [email]);
+    return getEmailRes
   } catch (error) {
     return null;
   }
 }
 
 
-export {setUser, getUserEmail, setUserAuth, deleteUserAuth}
+export {setUser, getUserEmail, setUserAuth, getUserAuth, deleteUserAuth}

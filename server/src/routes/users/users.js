@@ -8,6 +8,6 @@ userRouter.post("/register", registerMiddleware ,registerUser);
 
 userRouter.post("/login", loginUser);
 
-userRouter.delete("/logout", logOutUser);
+userRouter.delete("/logout/:email/:auth_token", logOutUser);
 
 export default userRouter;
