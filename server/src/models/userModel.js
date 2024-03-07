@@ -63,7 +63,28 @@ const setUserAuth = async (id_user, auth_token, user_ip)=>{
 }
 
 const getUserAuth = async (auth_token, user_ip) =>{
-  const userAuthQuery = `SELECT *, to_char(expiration_date, 'YYYY-MM-DD') AS expiration_date FROM users_sessions WHERE auth_token = $1 AND user_ip = $2`
+  const userAuthQuery = `SELECT 
+  us.id_session,
+  us.auth_token,
+  us.id_user,
+  to_char(us.expiration_date, 'YYYY-MM-DD') AS expiration_date,
+  us.user_ip,
+  us.last_login,
+  u.name,
+  u.last_name,
+  u.email,
+  ARRAY_AGG(DISTINCT r.rol_name) AS roles,
+  u.password
+FROM 
+  users_sessions us
+  INNER JOIN users u ON us.id_user = u.id_user
+  INNER JOIN users_roles ur ON u.id_user = ur.id_user
+  INNER JOIN roles r ON ur.id_rol = r.id_rol
+WHERE 
+  us.auth_token = $1 AND us.user_ip = $2
+GROUP BY 
+  us.id_session, us.auth_token, us.id_user, us.expiration_date, us.user_ip, us.last_login, u.name, u.last_name, u.email, u.password;
+`
   
   try {
     const userAuthRes = await pool.query(userAuthQuery, [auth_token, user_ip])
@@ -84,7 +105,13 @@ const deleteUserAuth = async(auth_token, user_ip) =>{
 }
 
 const getUserEmail = async (email)=>{
-  const getEmailQuery = "SELECT * FROM users WHERE email = $1";
+  const getEmailQuery = `SELECT  u.id_user, u.name, u.last_name, u.email, JSON_AGG(r.rol_name) AS roles FROM users u
+    JOIN users_roles ur ON u.id_user = ur.id_user
+    JOIN roles r ON ur.id_rol = r.id_rol
+    WHERE 
+      u.email = $1
+    GROUP BY 
+      u.id_user, u.name, u.last_name, u.email`;
 
   try {
     const getEmailRes = await pool.query(getEmailQuery, [email]);
@@ -93,6 +120,5 @@ const getUserEmail = async (email)=>{
     return null;
   }
 }
-
 
 export {setUser, getUserEmail, setUserAuth, getUserAuth, deleteUserAuth}
