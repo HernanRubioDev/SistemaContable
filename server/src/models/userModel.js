@@ -3,8 +3,11 @@ import {pool} from '../../db.cjs'
 const setUser = async (user)=>{
   const {name, last_name, email, password} = user;
   
-  const registerUserQuery = "INSERT INTO users (name, last_name, email, password) VALUES ($1, $2, $3, $4) RETURNING email, id_user";
-  const userRoleQuery = "INSERT INTO users_roles (id_rol, id_user) values ($1, $2)"
+  const registerUserQuery = `
+    INSERT INTO users (name, last_name, email, password) 
+    VALUES ($1, $2, $3, $4) 
+    RETURNING email, id_user`;
+  const userRoleQuery = `INSERT INTO users_roles (id_rol, id_user) values ($1, $2)`
   const client = await pool.connect();
 
   try {
@@ -24,10 +27,12 @@ const setUser = async (user)=>{
   }
 }
 
-const setUserAuth = async (id_user, auth_token)=>{
+const setUserAuth = async (id_user, auth_token, user_ip)=>{
   const authUserQuery = `
-  INSERT INTO users_sessions (auth_token, id_user, expiration_date) 
-  VALUES ($1, $2, CURRENT_TIMESTAMP + INTERVAL '30 days')
+  INSERT INTO users_sessions (auth_token, id_user, user_ip, last_login, expiration_date) 
+  VALUES ($1, $2, $3, NOW(), CURRENT_TIMESTAMP + INTERVAL '30 days')
+  ON CONFLICT (user_ip) DO UPDATE
+  SET auth_token = EXCLUDED.auth_token, expiration_date = EXCLUDED.expiration_date
   RETURNING 
     auth_token, 
     (
@@ -36,17 +41,21 @@ const setUserAuth = async (id_user, auth_token)=>{
           'name', u.name,
           'last_name', u.last_name,
           'email', u.email,
-          'rol', r.rol_name
+          'roles', (
+            SELECT JSON_AGG(r.rol_name)
+            FROM roles r 
+            JOIN users_roles ur ON r.id_rol = ur.id_rol 
+            WHERE ur.id_user = u.id_user
+          )
         ) AS user_data
       FROM 
         users u 
-        INNER JOIN users_roles ur ON u.id_user = ur.id_user 
-        INNER JOIN roles r ON ur.id_rol = r.id_rol 
       WHERE 
-        u.id_user = $3
+        u.id_user = $4
     ) AS user;
-`;  try {
-    const res = await pool.query(authUserQuery, [auth_token, id_user, id_user])
+`;
+    try {
+    const res = await pool.query(authUserQuery, [auth_token, id_user, user_ip, id_user])
     return res
   } catch (error) {
     console.log(error)

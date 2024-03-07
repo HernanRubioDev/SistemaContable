@@ -5,7 +5,6 @@ const registerValidator = async (user)=>{
   
   const {name, last_name, email, password, re_password} = user
   const nameRegEx = /^[a-zA-Z ]+$/g;
-  let errors = {}
 
   const nameValidation = (name)=>{
     const  error = {}
@@ -110,7 +109,8 @@ const registerValidator = async (user)=>{
     return errors
   }
 
-  return errors = {...nameValidation(name), ...lastNameValidation(last_name), ...await emailValidation(email), ...passwordValidator(password, re_password)}
+  const errors = {...nameValidation(name), ...lastNameValidation(last_name), ...await emailValidation(email), ...passwordValidator(password, re_password)}
+  return errors
 }
 
 export default registerValidator;

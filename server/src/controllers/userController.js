@@ -7,7 +7,6 @@ const registerUser = async (req, res)=>{
   user.password = await bcrypt.hash(user.password, 12);
   try {
     const result = await setUser(user);
-    delete res.rowCount[0].id_user;
     switch (true) {
       case result.rowCount !== 0:
         res.status(201).json({message:"El usuario fue creado correctamente.", data: result.rows[0]})
@@ -25,12 +24,12 @@ const registerUser = async (req, res)=>{
 const loginUser = async (req, res)=>{
   const user = req.body
   const {email} = user;
+  const user_ip = req.connection.remoteAddress
   try {
     const user_to_auth = await getUserEmail(email);
     const id_user = user_to_auth.rows[0].id_user
     const auth_token = uuidv4();
-    const auth_response = await setUserAuth(id_user, auth_token);
-
+    const auth_response = await setUserAuth(id_user, auth_token, user_ip);
     switch (true) {
       case auth_response.rowCount !== 0:
         res.status(201).json(auth_response.rows)

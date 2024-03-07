@@ -5,12 +5,12 @@ const registerMiddleware = async (req, res, next)=>{
 
   const user = req.body
 
-  const validations = await registerValidator(user)
+  const errors = await registerValidator(user)
 
-  isEmpty(validations) ? 
+  isEmpty(errors) ? 
   next() 
   : 
-  res.status(400).json({validations: validations});
+  res.status(400).json({validations: errors});
   
 }
 

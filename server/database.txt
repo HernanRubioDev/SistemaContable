@@ -13,7 +13,7 @@ CREATE TABLE roles (
 
 CREATE TABLE users_roles (
 	id_rol INTEGER NOT NULL, 
-	id_user INTEGER NOT NULL, 
+	id_user INTEGER NOT NULL,
 	FOREIGN KEY (id_user) REFERENCES users(id_user) ON DELETE CASCADE ON UPDATE CASCADE,
 	FOREIGN KEY (id_rol) REFERENCES roles(id_rol) ON DELETE CASCADE ON UPDATE CASCADE,
 	PRIMARY KEY (id_rol, id_user)
@@ -23,6 +23,8 @@ CREATE TABLE users_sessions(
 	id_session SERIAL PRIMARY KEY,
 	auth_token VARCHAR(60) NOT NULL,
 	id_user INTEGER NOT NULL,
+	last_login DATE NOT NULL,
 	expiration_date DATE NOT NULL,
+	user_ip VARCHAR NOT NULL UNQIE,
 	FOREIGN KEY (id_user) REFERENCES users(id_user) ON DELETE CASCADE ON UPDATE CASCADE
 );
