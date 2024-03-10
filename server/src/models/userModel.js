@@ -104,8 +104,8 @@ const deleteUserAuth = async(auth_token, user_ip) =>{
   }
 }
 
-const getUserEmail = async (email)=>{
-  const getEmailQuery = `SELECT  u.id_user, u.name, u.last_name, u.email, JSON_AGG(r.rol_name) AS roles FROM users u
+const getUserByEmail = async (email)=>{
+  const getEmailQuery = `SELECT  u.id_user, u.name, u.last_name, u.email, u.password, JSON_AGG(r.rol_name) AS roles FROM users u
     JOIN users_roles ur ON u.id_user = ur.id_user
     JOIN roles r ON ur.id_rol = r.id_rol
     WHERE 
@@ -121,4 +121,4 @@ const getUserEmail = async (email)=>{
   }
 }
 
-export {setUser, getUserEmail, setUserAuth, getUserAuth, deleteUserAuth}
+export {setUser, getUserByEmail, setUserAuth, getUserAuth, deleteUserAuth}

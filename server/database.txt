@@ -8,7 +8,7 @@ CREATE TABLE users (
 
 CREATE TABLE roles (
 	id_rol SERIAL PRIMARY KEY,
-	rol_name VARCHAR(20) NOT NULL
+	rol_name VARCHAR(20) NOT NULL UNIQUE
 );
 
 CREATE TABLE users_roles (
@@ -27,4 +27,14 @@ CREATE TABLE users_sessions(
 	expiration_date DATE NOT NULL,
 	user_ip VARCHAR NOT NULL UNQIE,
 	FOREIGN KEY (id_user) REFERENCES users(id_user) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+CREATE TABLE accounts ( 
+id_account SERIAL PRIMARY KEY, 
+name VARCHAR(30) NOT NULL UNIQUE, 
+recive_credit BOOLEAN NOT NULL,
+code VARCHAR(5) NOT NULL UNIQUE,
+account_type VARCHAR(2) NOT NULL CHECK (account_type IN ('A','P','R+','R-')),
+date_creation DATE NOT NULL,
+id_user INTEGER NOT NULL, FOREIGN KEY (id_user) REFERENCES users(id_user)
 );

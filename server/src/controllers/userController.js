@@ -1,4 +1,4 @@
-import {deleteUserAuth, getUserEmail, setUser, setUserAuth} from '../models/userModel.js';
+import {deleteUserAuth, getUserByEmail, setUser, setUserAuth} from '../models/userModel.js';
 import bcrypt from 'bcrypt'
 import { v4 as uuidv4 } from 'uuid';
 
@@ -22,12 +22,9 @@ const registerUser = async (req, res)=>{
 }
 
 const loginUser = async (req, res)=>{
-  const user = req.body
-  const {email} = user;
+  const {id_user} = req.user
   const user_ip = req.connection.remoteAddress
   try {
-    const user_to_auth = await getUserEmail(email);
-    const id_user = user_to_auth.rows[0].id_user
     const auth_token = uuidv4();
     const auth_response = await setUserAuth(id_user, auth_token, user_ip);
     switch (true) {
