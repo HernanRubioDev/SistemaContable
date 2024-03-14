@@ -5,6 +5,7 @@ const emailValidation = (email)=>{
   switch (true) {
     case !email:
         errors.username = "El campo 'Email' es obligatorio."
+        errors.status = 400
       break;
 
     default:
@@ -20,6 +21,7 @@ const passwordValidation = async (user, password)=>{
   switch (true) {
     case !password:
       errors.password = "Este campo es obligatorio."
+      errors.status = 400
       break;
 
     case !await bcrypt.compare(password, user.rows[0].password):

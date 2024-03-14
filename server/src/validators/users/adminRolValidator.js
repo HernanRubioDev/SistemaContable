@@ -1,5 +1,5 @@
 
-const adminRolValidation = (roles)=>{
+const adminRolValidator = (roles)=>{
   const errors = {}
   try {
     switch (true) {
@@ -20,4 +20,4 @@ const adminRolValidation = (roles)=>{
   return errors
 }
 
-export default adminRolValidation
+export default adminRolValidator;

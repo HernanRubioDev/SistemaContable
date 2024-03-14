@@ -16,7 +16,6 @@ const authMiddleware = async (req, res, next)=>{
     else res.status(errors.status).json({message: errors.message})
     
   } catch (error) {
-    console.log(error)
     res.status(500).json({message:"Ha ocurrido un error inesperado. Inténtelo más tarde."})
   }
 
