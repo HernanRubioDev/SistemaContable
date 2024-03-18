@@ -1,5 +1,6 @@
 import express from 'express';
 import dotenv from 'dotenv'
+import cors from 'cors'
 
 dotenv.config();
 const PORT = process.env.PORT
@@ -11,6 +12,7 @@ import userRouter from './routes/users/users.js';
 import accountRouter from './routes/users/accounts.js';
 
 //MIDDLEWARES
+app.use(cors({origin: true}))
 app.use(express.json());
 
 //ROUTES

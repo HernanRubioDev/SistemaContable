@@ -28,16 +28,16 @@ const setUser = async (user)=>{
 }
 
 const setUserAuth = async (id_user, auth_token, user_ip)=>{
-  const authUserQuery = `
+const authUserQuery = `
   INSERT INTO users_sessions (auth_token, id_user, user_ip, last_login, expiration_date) 
   VALUES ($1, $2, $3, NOW(), CURRENT_TIMESTAMP + INTERVAL '30 days')
   ON CONFLICT (user_ip) DO UPDATE
   SET auth_token = EXCLUDED.auth_token, expiration_date = EXCLUDED.expiration_date
   RETURNING 
-    auth_token, 
     (
       SELECT 
         JSON_BUILD_OBJECT(
+          'auth_token', auth_token,
           'name', u.name,
           'last_name', u.last_name,
           'email', u.email,
@@ -47,13 +47,14 @@ const setUserAuth = async (id_user, auth_token, user_ip)=>{
             JOIN users_roles ur ON r.id_rol = ur.id_rol 
             WHERE ur.id_user = u.id_user
           )
-        ) AS user_data
+        ) AS user
       FROM 
         users u 
       WHERE 
         u.id_user = $4
-    ) AS user;
+    );
 `;
+
     try {
       const authUserRes = await pool.query(authUserQuery, [auth_token, id_user, user_ip, id_user])
       return authUserRes

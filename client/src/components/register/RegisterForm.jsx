@@ -1,10 +1,8 @@
-import useRegister from "@/hooks/useRegister";
 import { NavLink } from "react-router-dom";
 import Loader from "../Loader";
-
+import useRegister from "@/hooks/users/useRegister";
 
 const RegisterForm = ()=>{
-
   const {user, registerErrors, registerLoading, handleChange, handleSubmit} = useRegister()
 
   return(

@@ -10,6 +10,7 @@ const emailValidation = (email)=>{
 
     default:
       delete errors.username
+      delete errors.status
       break;
   }
   return errors;
@@ -24,13 +25,19 @@ const passwordValidation = async (user, password)=>{
       errors.status = 400
       break;
 
+    case user.rowCount === 0:
+      errors.email = "No es ha encontrado una cuenta asociada a éste email."
+      errors.status = 404
+      break
+
     case !await bcrypt.compare(password, user.rows[0].password):
       errors.status = 403
-      errors.password = "La contraseña o el email son incorrectos."
+      errors.password = "La contraseña o el email es incorrecto."
       break;
 
     default:
       delete errors.password
+      delete errors.status
       break;
   }
   return errors;

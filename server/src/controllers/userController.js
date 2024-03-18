@@ -1,4 +1,4 @@
-import {deleteUserAuth, getUserByEmail, setUser, setUserAuth} from '../models/userModel.js';
+import {deleteUserAuth, setUser, setUserAuth} from '../models/userModel.js';
 import bcrypt from 'bcrypt'
 import { v4 as uuidv4 } from 'uuid';
 
@@ -9,15 +9,15 @@ const registerUser = async (req, res)=>{
     const result = await setUser(user);
     switch (true) {
       case result.rowCount !== 0:
-        res.status(201).json({message:"El usuario fue creado correctamente.", data: result.rows[0]})
+        res.status(201).json({status: 201, message:"El usuario fue creado correctamente.", data: result.rows[0]})
         break;
     
       default:
-        res.status(500).json({message:"Se a producido un error inesperado. Inténtelo más tarde."})
+        res.status(500).json({status: 500, message:"Se a producido un error inesperado. Inténtelo más tarde."})
         break;
     }
   } catch (error) {
-    res.status(500).json({message:"Se a producido un error inesperado. Inténtelo más tarde."})
+    res.status(500).json({status: 500, message:"Se a producido un error inesperado. Inténtelo más tarde."})
   }
 }
 
@@ -29,15 +29,15 @@ const loginUser = async (req, res)=>{
     const auth_response = await setUserAuth(id_user, auth_token, user_ip);
     switch (true) {
       case auth_response.rowCount !== 0:
-        res.status(201).json(auth_response.rows)
+        res.status(201).json({stauts: 201, user: auth_response.rows[0].user})
         break;
     
       default:
-        res.status(500).json({message:"Se a producido un error inesperado. Inténtelo más tarde."})
+        res.status(500).json({status: 500, message:"Se a producido un error inesperado. Inténtelo más tarde."})
         break;
     }
   } catch (error) {
-    res.status(500).json({message:"Se a producido un error inesperado. Inténtelo más tarde."})
+    res.status(500).json({status: 500, message:"Se a producido un error inesperado. Inténtelo más tarde."})
   }
 }
 
@@ -48,15 +48,15 @@ const logOutUser = async (req, res)=>{
     const logout_response = await deleteUserAuth(auth_token, user_ip);
     switch (true) {
       case logout_response.rowCount !==0:
-        res.status(200).json({message: "Se cerró sesión correctamente."})
+        res.status(200).json({status:200, message: "Se cerró sesión correctamente."})
         break;
     
       default:
-        res.status(500).json({message:"Se a producido un error inesperado. Inténtelo más tarde."})
+        res.status(500).json({status: 500, message:"Se a producido un error inesperado. Inténtelo más tarde."})
         break;
     }
   } catch (error) {
-    res.status(500).json({message:"Se a producido un error inesperado. Inténtelo más tarde."})
+    res.status(500).json({status: 500, message:"Se a producido un error inesperado. Inténtelo más tarde."})
   }
 }
 
