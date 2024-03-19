@@ -1,16 +1,14 @@
-import DashboardContainer from "@/components/dashboard/DashboardContainer";
+import AddAccountContainer from "@/components/accounts/AddAccountContainer";
 import AccountingMenu from "@/components/menu/AccountingMenu";
 import MenuWrapper from "@/components/menu/MenuWrapper";
-
-const Dashboard = ()=>{
+const Account =({children})=>{
   return(
     <main className="vh-100 d-flex flex-wrap bg-body-secondary overflow-hidden">
       <MenuWrapper>
-        <AccountingMenu />
+        <AccountingMenu/>
       </MenuWrapper>
-      <DashboardContainer />
+      {children}
     </main>
-  )
+  );
 }
-
-export default Dashboard;
+export default Account;

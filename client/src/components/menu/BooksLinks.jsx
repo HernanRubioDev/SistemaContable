@@ -6,7 +6,7 @@ const BookLinks = ()=>{
     <div className="accordion-item border-0">
     <h2 className="accordion-header">
       <button className="accordion-button rounded-0 bg-body-secondary collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseBookAccordion" aria-expanded="false" aria-controls="collapseBookAccordion">
-        <span className="fw-bold text-body-tertiary">Libros</span>
+        <span className="fw-bold text-body-tertiary d-flex justify-content-center"><span className="material-symbols-outlined me-2">book_2</span>Libros</span>
       </button>
     </h2>
     </div>

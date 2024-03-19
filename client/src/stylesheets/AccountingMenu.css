@@ -1,6 +1,6 @@
 
 .accordion-button:not(.collapsed){
-background-color: #dbdfe2 !important;
+background-color: #dbdfe2;
 }
 .accordion-button:focus {
   box-shadow: none;
@@ -13,6 +13,24 @@ background-color: #dbdfe2 !important;
   transition: 0.15s;
 }
 .accordion-link:hover{
-  background-color: #e9ecef !important;
+  background-color: #dee1e4;
   transition: 0.15s;
+}
+
+.menu-link{
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  background-color: #e9ecef;
+}
+
+.menu-link:hover{
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  background-color: #dee1e4;
+}
+
+.menu-wrapper{
+  max-width: 18rem;
 }

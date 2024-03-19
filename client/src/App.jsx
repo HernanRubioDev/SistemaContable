@@ -3,7 +3,8 @@ import './App.css'
 import Login from './pages/Login'
 import Register from './pages/Register'
 import Dashboard from './pages/Dashboard'
-
+import Account from './pages/Account'
+import AddAccountContainer from './components/accounts/AddAccountContainer'
 function App() {
 
   return (
@@ -13,6 +14,7 @@ function App() {
         <Route path='/' element={<Login />}/>
         <Route path='/register' element={<Register />}/>
         <Route path='/dashboard' element={<Dashboard />}/>
+        <Route path='/accounts' element={<Account><AddAccountContainer /></Account>}/>
       </Routes>
     </Router>
     </>

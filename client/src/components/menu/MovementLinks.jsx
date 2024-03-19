@@ -6,7 +6,7 @@ const MovementLinks = ()=>{
     <div className="accordion-item border-0">
     <h2 className="accordion-header">
       <button className="accordion-button rounded-0 bg-body-secondary collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseMovementAccordion" aria-expanded="false" aria-controls="collapseMovementAccordion">
-        <span className="fw-bold text-body-tertiary">Movimientos</span>
+        <span className="fw-bold text-body-tertiary d-flex justify-content-center"><span className="material-symbols-outlined  me-2">compare_arrows</span>Movimientos</span>
       </button>
     </h2>
     </div>
