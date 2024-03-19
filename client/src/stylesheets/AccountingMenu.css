@@ -34,3 +34,11 @@ background-color: #dbdfe2;
 .menu-wrapper{
   max-width: 18rem;
 }
+
+.add-account-form{
+  margin-top: 5rem;
+}
+
+.opem-menu-btn{
+  font-size: 3rem;
+}

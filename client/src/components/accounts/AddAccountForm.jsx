@@ -1,6 +1,9 @@
 const AddAccountForm = ()=>{
   return(
-    <form className="bg-white d-flex flex-column col-lg-10 col-12 rounded-2 p-3 shadow gap-3">
+    <form className="add-account-form bg-white d-flex flex-column col-lg-10 col-12 rounded-2 p-3 shadow gap-3">
+      <div className="w-100">
+        <h3 className="text-secondary fw-bold text-body-tertiary">Registrar cuenta</h3>
+      </div>
       <div className="d-flex flex-grow-1 gap-3 flex-wrap">
         <div className="flex-grow-1">
           <label htmlFor="accountName" className="form-label text-secondary fw-semibold">Nombre</label>
