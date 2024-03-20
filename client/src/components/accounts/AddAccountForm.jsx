@@ -7,11 +7,11 @@ const AddAccountForm = ()=>{
       </div>
       <div className="d-flex flex-grow-1 gap-3 flex-wrap">
         <div className="flex-grow-1">
-          <label htmlFor="accountName" className="form-label text-secondary fw-semibold">Nombre</label>
+          <label htmlFor="accountName" className="form-label text-secondary fw-semibold m-0">Nombre</label>
           <input type="text" className={`form-control`} id="accountName" placeholder="Ej: Banco Río" name="name"/>
         </div>
         <div className="flex-grow-1">
-          <label htmlFor="account_type" className="form-label text-secondary fw-semibold">Tipo</label>
+          <label htmlFor="account_type" className="form-label text-secondary fw-semibold m-0">Tipo</label>
           <select className="form-select" id="account_type" aria-label="Default select example">
             <option value="1">Activo</option>
             <option value="2">Pasivo</option>
@@ -20,7 +20,7 @@ const AddAccountForm = ()=>{
           </select>
         </div>
         <div className="d-flex flex-column flex-grow-1">
-          <label className="form-label text-secondary fw-semibold">Recibe crédito</label>
+          <label className="form-label text-secondary fw-semibold m-0">Recibe crédito</label>
           <div className="d-flex align-items-center j gap-3 border h-100 rounded-1">
             <div className="d-flex ms-2">
               <input className="form-check-input" type="radio" id="reciveCreditTrue" name="recive_credit"/>
@@ -35,14 +35,14 @@ const AddAccountForm = ()=>{
       </div>
       <div className="d-flex gap-3">
         <div className="w-50">
-        <label htmlFor="major_account" className="form-label text-secondary fw-semibold">Tipo</label>
+        <label htmlFor="major_account" className="form-label text-secondary fw-semibold m-0">Tipo</label>
           <select className="form-select" id="major_account" aria-label="Default select example">
             <option value="1">Banco Rio</option>
             <option value="1">Banco Nacion</option>
           </select>
         </div>
         <div className="w-50">
-          <label htmlFor="code" className="form-label text-secondary fw-semibold">Código</label>
+          <label htmlFor="code" className="form-label text-secondary fw-semibold m-0">Código</label>
           <input type="text" className={`form-control`} id="code" placeholder="Aquí aparecera el código de la cuenta" name="code" disabled/>
         </div>
       </div>

@@ -9,15 +9,15 @@ const SearchAccountForm = ()=>{
       <form className="d-flex flex-wrap">
       <div className="d-flex flex-grow-1 gap-3">
         <div className="flex-grow-1">
-          <label htmlFor="accountName" className="form-label text-secondary fw-semibold">Nombre</label>
+          <label htmlFor="accountName" className="form-label text-secondary fw-semibold m-0">Nombre</label>
           <input type="text" className="form-control" id="accountName" placeholder="Ej: Banco Río" name="name"/>
         </div>
         <div className="flex-grow-1">
-          <label htmlFor="dateFrom" className="form-label text-secondary fw-semibold">Desde</label>
+          <label htmlFor="dateFrom" className="form-label text-secondary fw-semibold m-0">Desde</label>
           <input type="date" className="form-control" id="dateFrom" placeholder="Ej: Banco Río" name="dateFrom"/>
         </div>
         <div className="flex-grow-1">
-          <label htmlFor="dateTo" className="form-label text-secondary fw-semibold">Hasta</label>
+          <label htmlFor="dateTo" className="form-label text-secondary fw-semibold m-0">Hasta</label>
           <input type="date" className="form-control" id="dateTo" placeholder="Ej: Banco Río" name="dateTo"/>
         </div>
       </div>

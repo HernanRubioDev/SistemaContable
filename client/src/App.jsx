@@ -6,6 +6,8 @@ import Dashboard from './pages/Dashboard'
 import Account from './pages/Account'
 import AddAccountContainer from './components/accounts/AddAccountContainer'
 import SearchAccountContainer from './components/accounts/SearchAccountContainer'
+import Movement from './pages/Movement'
+import AddMovementContainer from './components/movements/AddMovementContainer'
 
 function App() {
   return (
@@ -17,6 +19,7 @@ function App() {
         <Route path='/dashboard' element={<Dashboard />}/>
         <Route path='/accounts' element={<Account><AddAccountContainer /></Account>}/>
         <Route path='/search' element={<Account><SearchAccountContainer /></Account>}/>
+        <Route path='/movements' element={<Movement><AddMovementContainer/></Movement>}/>
       </Routes>
     </Router>
     </>
