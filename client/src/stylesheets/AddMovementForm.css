@@ -1,3 +1,7 @@
 .movement-textarea{
   resize: none;
 }
+
+.add-account-form{
+  max-height: 85%;
+}

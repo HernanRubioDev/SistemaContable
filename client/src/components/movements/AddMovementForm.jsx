@@ -1,9 +1,9 @@
-import '@/stylesheets/AddMovementForm.css';
 import AddMovementTable from './AddMovementTable';
+import '@/stylesheets/AddMovementForm.css';
 
 const AddMovementForm = ()=>{
   return(
-    <form className="add-account-form bg-white d-flex flex-column col-lg-10 col-12 rounded-2 p-3 shadow gap-3 mt-2">
+    <form className="add-account-form bg-white d-flex flex-column col-lg-10 col-12 rounded-2 p-3 shadow gap-3 mt-2 overflow-hidden">
       <div className="w-100">
         <h3 className="text-secondary fw-bold text-body-tertiary fs-5 m-0">Registrar asiento</h3>
       </div>
