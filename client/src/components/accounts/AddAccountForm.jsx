@@ -1,8 +1,9 @@
+
 const AddAccountForm = ()=>{
   return(
-    <form className="add-account-form bg-white d-flex flex-column col-lg-10 col-12 rounded-2 p-3 shadow gap-3">
+    <form className="add-account-form bg-white d-flex flex-column col-lg-10 col-12 rounded-2 p-3 shadow gap-3 mt-5">
       <div className="w-100">
-        <h3 className="text-secondary fw-bold text-body-tertiary">Registrar cuenta</h3>
+        <h3 className="text-secondary fw-bold text-body-tertiary fs-5">Registrar cuenta</h3>
       </div>
       <div className="d-flex flex-grow-1 gap-3 flex-wrap">
         <div className="flex-grow-1">
@@ -10,7 +11,7 @@ const AddAccountForm = ()=>{
           <input type="text" className={`form-control`} id="accountName" placeholder="Ej: Banco Río" name="name"/>
         </div>
         <div className="flex-grow-1">
-        <label htmlFor="account_type" className="form-label text-secondary fw-semibold">Tipo</label>
+          <label htmlFor="account_type" className="form-label text-secondary fw-semibold">Tipo</label>
           <select className="form-select" id="account_type" aria-label="Default select example">
             <option value="1">Activo</option>
             <option value="2">Pasivo</option>
@@ -46,8 +47,8 @@ const AddAccountForm = ()=>{
         </div>
       </div>
       <div className="d-flex flex-wrap justify-content-lg-end gap-2">
-        <button type="submit" className="btn btn-secondary col-12 col-lg-2 d-flex justify-content-center align-items-center py-2"><span className="material-symbols-outlined me-2">ink_eraser</span>Limpiar</button>
-        <button type="submit" className="btn btn-primary col-12 col-lg-2 d-flex justify-content-center align-items-center py-2"><span className="material-symbols-outlined me-2">save</span>Agregar</button>
+        <button type="submit" className="btn btn-secondary col-12 col-lg-2 d-flex justify-content-center align-items-center"><span className="material-symbols-outlined me-2">ink_eraser</span>Limpiar</button>
+        <button type="submit" className="btn btn-primary col-12 col-lg-2 d-flex justify-content-center align-items-center"><span className="material-symbols-outlined me-2">save</span>Agregar</button>
       </div>
     </form>
   );
