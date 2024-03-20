@@ -6,8 +6,8 @@ import Dashboard from './pages/Dashboard'
 import Account from './pages/Account'
 import AddAccountContainer from './components/accounts/AddAccountContainer'
 import SearchAccountContainer from './components/accounts/SearchAccountContainer'
-function App() {
 
+function App() {
   return (
     <>
     <Router>

@@ -1,3 +1,5 @@
+import AccountTable from "./AccountTable";
+
 const SearchAccountForm = ()=>{
   return(
     <div className="bg-white d-flex flex-column col-lg-10 col-12 rounded-2 p-3 shadow mt-2 gap-3">
@@ -23,6 +25,7 @@ const SearchAccountForm = ()=>{
         <button type="submit" className="btn btn-sm btn-primary col-12 col-lg-2 d-flex justify-content-center align-items-center"><span className="material-symbols-outlined me-1">search</span>Buscar</button>
       </div>
       </form>
+      <AccountTable />
     </div>
   );
 }
