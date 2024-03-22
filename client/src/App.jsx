@@ -9,6 +9,9 @@ import AddMovementForm from './components/movements/AddMovementForm'
 import AddAccountForm from './components/accounts/AddAccountForm'
 import SearchAccountForm from './components/accounts/SearchAccountForm'
 import SearchMovementForm from './components/movements/SearchMovementForm'
+import Book from './pages/Book'
+import JournalBook from './components/books/JournalBookForm'
+import LedgerBookForm from './components/books/LedgerBookForm'
 
 function App() {
   return (
@@ -25,6 +28,10 @@ function App() {
         <Route path='/movement/' element={<Movement />}>
           <Route path='add' element={<AddMovementForm />}/>
           <Route path='search' element={<SearchMovementForm />}/>
+        </Route>
+        <Route path='/book/' element={<Book />}>
+          <Route path='journal' element={<JournalBook />}/>
+          <Route path='ledger' element={<LedgerBookForm />}/>
         </Route>
       </Routes>
     </Router>

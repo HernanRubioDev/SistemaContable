@@ -12,8 +12,8 @@ const BookLinks = ()=>{
     </div>
     <div id="collapseBookAccordion" className="accordion-collapse collapse" data-bs-parent="#bookAccordion">
       <div className="accordion-body p-0 border-top">
-        <NavLink className='accordion-link py-2 text-secondary fw-semibold'><span className="ms-4 ps-2">Mayor</span></NavLink>
-        <NavLink className='accordion-link py-2 text-secondary fw-semibold'><span className="ms-4 ps-2">Diario</span></NavLink>
+        <NavLink to='/book/ledger' className='accordion-link py-2 text-secondary fw-semibold'><span className="ms-4 ps-2">Mayor</span></NavLink>
+        <NavLink to='/book/journal' className='accordion-link py-2 text-secondary fw-semibold'><span className="ms-4 ps-2">Diario</span></NavLink>
       </div>
     </div>
   </div>

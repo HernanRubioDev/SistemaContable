@@ -12,8 +12,8 @@ const MovementLinks = ()=>{
     </div>
     <div id="collapseMovementAccordion" className="accordion-collapse collapse" data-bs-parent="#movementAccordion">
       <div className="accordion-body p-0 border-top">
-        <NavLink className='accordion-link py-2 text-secondary fw-semibold'><span className="ms-4 ps-2">Agregar</span></NavLink>
-        <NavLink className='accordion-link py-2 text-secondary fw-semibold'><span className="ms-4 ps-2">Buscar</span></NavLink>
+        <NavLink to='/movement/add' className='accordion-link py-2 text-secondary fw-semibold'><span className="ms-4 ps-2">Agregar</span></NavLink>
+        <NavLink to='/movement/search' className='accordion-link py-2 text-secondary fw-semibold'><span className="ms-4 ps-2">Buscar</span></NavLink>
       </div>
     </div>
   </div>
