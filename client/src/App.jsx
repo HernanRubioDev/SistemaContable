@@ -4,10 +4,11 @@ import Login from './pages/Login'
 import Register from './pages/Register'
 import Dashboard from './pages/Dashboard'
 import Account from './pages/Account'
-import AddAccountContainer from './components/accounts/AddAccountContainer'
-import SearchAccountContainer from './components/accounts/SearchAccountContainer'
 import Movement from './pages/Movement'
-import AddMovementContainer from './components/movements/AddMovementContainer'
+import AddMovementForm from './components/movements/AddMovementForm'
+import AddAccountForm from './components/accounts/AddAccountForm'
+import SearchAccountForm from './components/accounts/SearchAccountForm'
+import SearchMovementForm from './components/movements/SearchMovementForm'
 
 function App() {
   return (
@@ -17,9 +18,14 @@ function App() {
         <Route path='/' element={<Login />}/>
         <Route path='/register' element={<Register />}/>
         <Route path='/dashboard' element={<Dashboard />}/>
-        <Route path='/accounts' element={<Account><AddAccountContainer /></Account>}/>
-        <Route path='/search' element={<Account><SearchAccountContainer /></Account>}/>
-        <Route path='/movements' element={<Movement><AddMovementContainer/></Movement>}/>
+        <Route path='/account/' element={<Account />}>
+          <Route path='add' element={<AddAccountForm />}/>
+          <Route path='search' element={<SearchAccountForm />}/>
+        </Route>
+        <Route path='/movement/' element={<Movement />}>
+          <Route path='add' element={<AddMovementForm />}/>
+          <Route path='search' element={<SearchMovementForm />}/>
+        </Route>
       </Routes>
     </Router>
     </>

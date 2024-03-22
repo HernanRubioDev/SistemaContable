@@ -1,6 +1,6 @@
 const AddMovementTableRow = ()=>{
   return(
-    <tr>
+  <tr>
     <td><input className="form-control form-control-sm col-2" type="text" name="account" disabled/></td>
     <td><input className="form-control form-control-sm col-2" type="text" name="debit" disabled/></td>
     <td><input className="form-control form-control-sm col-2" type="text" name="credit" disabled/></td>
