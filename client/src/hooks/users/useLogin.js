@@ -1,7 +1,8 @@
+import SessionContext from "@/context/SessionContext";
 import { setLogin } from "@/services/userServices";
 import isEmpty from "@/utils/isEmpty";
 import loginValidator from "@/validations/loginValidator";
-import { useState } from "react"
+import { useContext , useState} from "react";
 
 const useLogin = ()=>{
   const initialUser = {
@@ -12,6 +13,7 @@ const useLogin = ()=>{
   const [loginLoading, setLoginLoading] = useState(false);
   const [loginErrors, setLoginErrors] = useState({});
   const [loginResponse, setLoginResponse] = useState({})
+  const {handleSession} = useContext(SessionContext)
 
   const loginUser = async()=>{
     const infoModal = new bootstrap.Modal(document.getElementById('infoModal'))
@@ -21,6 +23,7 @@ const useLogin = ()=>{
       switch (true) {
         case res.status === 201:
           localStorage.setItem("user", JSON.stringify(res.user))
+          handleSession(res.user)
           break;
 
         case res.status === 403:
