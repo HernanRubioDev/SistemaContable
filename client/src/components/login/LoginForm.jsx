@@ -1,11 +1,8 @@
 
 import { NavLink } from "react-router-dom";
 import Loader from "../Loader";
-import useLogin from "@/hooks/users/useLogin";
 
-const LoginForm = ()=>{
-  const {user, loginErrors, loginLoading, handleChange, handleSubmit} = useLogin()
-
+const LoginForm = ({user, loginErrors, loginLoading, handleChange, handleSubmit})=>{
   return(
     <div className="col-12 col-lg-9 d-flex rounded-3 h-75 shadow">
       <div className="d-none d-lg-flex flex-column justify-content-center col-6 bg-body-secondary rounded-start-3">

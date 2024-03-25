@@ -28,7 +28,6 @@ const setRegister = async(user) =>{
   }
   try {
     const res = await fetch(API_URL, options).then(res => res.json());
-    console.log(res)
     return res
   } catch (error) {
     return null

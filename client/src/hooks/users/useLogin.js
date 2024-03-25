@@ -8,19 +8,19 @@ const useLogin = ()=>{
     email:'',
     password:''
   }
-
   const [user, setUser] = useState(initialUser);
   const [loginLoading, setLoginLoading] = useState(false);
   const [loginErrors, setLoginErrors] = useState({});
+  const [loginResponse, setLoginResponse] = useState({})
 
   const loginUser = async()=>{
+    const infoModal = new bootstrap.Modal(document.getElementById('infoModal'))
     setLoginLoading(true)
     try {
       const res = await setLogin(user)
-      console.log(res)
       switch (true) {
         case res.status === 201:
-          console.log("201")
+          localStorage.setItem("user", JSON.stringify(res.user))
           break;
 
         case res.status === 403:
@@ -28,21 +28,19 @@ const useLogin = ()=>{
           break
 
         case res.status === 400:
+          setLoginResponse({title: "Ups...", message:'Parece que ha ocurrindo un error. Inténtelo más tarde.', status:'danger'})
           break;
 
         case res.status === 404:
           setLoginErrors(res.validations)
           break;
 
-        case res.status === 500:
-          console.log(500)
-          break;
-
         default:
+        setLoginResponse({title: "Ups...", message:'Parece que ha ocurrindo un error. Inténtelo más tarde.', status:'danger'})
           break;
       }
     } catch (error) {
-      console.log(error)
+      setLoginResponse({title: "Ups...", message:'Parece que ha ocurrindo un error. Inténtelo más tarde.', status:'danger'})
     }finally{
       setLoginLoading(false)
     }
@@ -62,7 +60,7 @@ const useLogin = ()=>{
     if(isEmpty(errors)) loginUser(user)
   }
 
-  return {user, loginErrors, loginLoading, handleChange, handleSubmit}
+  return {user, loginErrors, loginLoading, loginResponse, handleChange, handleSubmit}
 }
 
 export default useLogin;

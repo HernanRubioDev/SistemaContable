@@ -29,7 +29,7 @@ const loginUser = async (req, res)=>{
     const auth_response = await setUserAuth(id_user, auth_token, user_ip);
     switch (true) {
       case auth_response.rowCount !== 0:
-        res.status(201).json({stauts: 201, user: auth_response.rows[0].user})
+        res.status(201).json({status: 201, user: auth_response.rows[0].user})
         break;
     
       default:

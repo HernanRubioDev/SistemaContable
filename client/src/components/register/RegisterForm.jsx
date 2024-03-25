@@ -1,9 +1,6 @@
 import { NavLink } from "react-router-dom";
 import Loader from "../Loader";
-import useRegister from "@/hooks/users/useRegister";
-
-const RegisterForm = ()=>{
-  const {user, registerErrors, registerLoading, handleChange, handleSubmit} = useRegister()
+const RegisterForm = ({user, registerErrors, registerLoading, handleChange, handleSubmit})=>{
 
   return(
     <div className="col-12 col-lg-9 d-flex rounded-3 h-75 shadow">

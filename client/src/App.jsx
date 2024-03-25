@@ -21,14 +21,17 @@ function App() {
         <Route path='/' element={<Login />}/>
         <Route path='/register' element={<Register />}/>
         <Route path='/dashboard' element={<Dashboard />}/>
+
         <Route path='/account/' element={<Account />}>
           <Route path='add' element={<AddAccountForm />}/>
           <Route path='search' element={<SearchAccountForm />}/>
         </Route>
+
         <Route path='/movement/' element={<Movement />}>
           <Route path='add' element={<AddMovementForm />}/>
           <Route path='search' element={<SearchMovementForm />}/>
         </Route>
+        
         <Route path='/book/' element={<Book />}>
           <Route path='journal' element={<JournalBook />}/>
           <Route path='ledger' element={<LedgerBookForm />}/>
