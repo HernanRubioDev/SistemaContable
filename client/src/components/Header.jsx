@@ -1,7 +1,9 @@
 import { NavLink } from "react-router-dom"
 import '@/stylesheets/Header.css'
 import OpenMenuBtn from "./OpenMenuBtn"
+import useLogout from "@/hooks/users/useLogout"
 const Header = ()=>{
+const {logOutUser} = useLogout()
 return(
   <nav className="header navbar navbar-expand-lg bg-body-tertiary border-bottom col-12">
     <div className="container-fluid">
@@ -22,7 +24,7 @@ return(
           </ul>
           <ul className=" navbar-nav justify-content-end flex-grow-1 pe-3 text-center">
             <li className="nav-item">
-              <button type="button" className='nav-link fw-semibold text-secondary w-100'>Salir</button>
+              <button onClick={()=>logOutUser()} type="button" className='nav-link fw-semibold text-secondary w-100'>Salir</button>
             </li>
           </ul>
         </div>
