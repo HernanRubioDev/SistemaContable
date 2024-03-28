@@ -1,8 +1,10 @@
-import useAccount from "@/hooks/accounts/useAccount";
 import { useEffect } from "react";
+import Loader from "../Loader";
+import useAddAccount from "@/hooks/accounts/useAddAccount";
+import InfoToast from "../InfoToast";
 
 const AddAccountForm = ()=>{
-  const {account, setNewAccount, handleChange, handleSubmit, handleReset} = useAccount()
+  const {account, loading, accountResponse, setNewAccount, handleChange, handleSubmit, handleReset} = useAddAccount()
   useEffect(()=>{
     if (account.recive_credit === 'false') {
       setNewAccount({
@@ -11,9 +13,11 @@ const AddAccountForm = ()=>{
       });
     }
   },[account.recive_credit])
+  
   return(
+    <>
     <div className="d-flex flex-column align-items-center flex-grow-1 bg-secondary-subtle px-3 h-100">
-      <form onSubmit={(e)=>handleSubmit(e)} className="add-account-form bg-white d-flex flex-column col-lg-10 col-12 rounded-2 p-3 shadow gap-3 mt-5">
+      <form onSubmit={(e)=>handleSubmit(e)} className="add-account-form bg-white d-flex flex-column col-lg-10 col-12 rounded-2 p-3 shadow gap-3 mt-2">
         <div className="w-100">
           <h3 className="text-secondary fw-bold text-body-tertiary fs-5">Registrar cuenta</h3>
         </div>
@@ -60,12 +64,19 @@ const AddAccountForm = ()=>{
             <input type="text" className={`form-control`} id="code" placeholder="Aquí aparecera el código de la cuenta" name="account_code" value={account.code} disabled/>
           </div>
         </div>
+        {loading ? 
+        <div className="d-flex justify-content-center">
+          <Loader />
+        </div> :
         <div className="d-flex flex-wrap justify-content-lg-end gap-2">
           <button onClick={()=>handleReset()} type="reset" className="btn btn-sm btn-secondary col-12 col-lg-2 d-flex justify-content-center align-items-center"><span className="material-symbols-outlined me-2">ink_eraser</span>Limpiar</button>
           <button type="submit" className="btn btn-sm btn-primary col-12 col-lg-2 d-flex justify-content-center align-items-center"><span className="material-symbols-outlined me-2">save</span>Agregar</button>
         </div>
+        }
       </form>
     </div>
+    <InfoToast content={accountResponse}/>
+    </>
   );
 }
 export default AddAccountForm

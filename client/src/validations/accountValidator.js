@@ -1,19 +1,19 @@
 const accountValidator = (account)=>{
   const {name, recive_credit, account_type, code} = account
-
+  
   const nameValidation = (name)=>{
     const errors = {}
     switch (true) {
       case !name.trim():
-        errors.name = "El campo 'Nombre' es obligatorio."
+        errors.message = "El campo 'Nombre' es obligatorio."
         break;
 
       case name.lengh < 3 || name.length > 10:
-        errors.name = "El campo 'Nombre' debe contener entre 3 y 10 caracteres."
+        errors.message = "El campo 'Nombre' debe contener entre 3 y 10 caracteres."
         break;
 
       default:
-        delete errors.name
+        delete errors.message
     }
     return errors
   }
@@ -23,11 +23,11 @@ const accountValidator = (account)=>{
     const types = ['true', 'false']
     switch (true) {
       case !types.includes(recive_credit):
-        errors.recive_credit = "El campo 'Recibe crédito' contiene valores incorrectos."
+        errors.message = "El campo 'Recibe crédito' contiene valores incorrectos."
         break;
     
       default:
-        delete errors.recive_credit
+        delete errors.message
         break;
     }
     return errors
@@ -38,31 +38,35 @@ const accountValidator = (account)=>{
     const types = ['A','P','R-','R+']
     switch (true) {
       case !types.includes(account_type):
-        errors.accout_type = "El tipo de cuenta no es válido."
+        errors.message = "El tipo de cuenta no es válido."
         break;
     
       default:
-        delete errors.accout_type
+        delete errors.message
         break;
     }
     return errors
   }
 
-  const codeValidation = (code)=>{
+  const codeValidation = (code, recive_credit)=>{
     const errors = {}
     const codeRegEx = /^[1-5][0-9]{4}$/
     switch (true) {
+      case recive_credit==='true' && !code:
+        errors.message = "El campo 'Código' no puede estar vacio."
+        break;
+
       case !recive_credit && !codeRegEx.test(code):
-        errors.code = "Formato de código inválido."
+        errors.message = "Formato de código inválido."
         break;
 
       default:
-        delete errors.code
+        delete errors.message
         break;
     }
     return errors
   }
-  const errors = {...nameValidation(name), ...reciveCreditValidation(recive_credit), ...accountTypeValidation(account_type), ...codeValidation(code)}
+  const errors = {...nameValidation(name), ...reciveCreditValidation(recive_credit), ...accountTypeValidation(account_type), ...codeValidation(code, recive_credit)}
   return errors
 }
 

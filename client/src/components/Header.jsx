@@ -4,6 +4,7 @@ import OpenMenuBtn from "./OpenMenuBtn"
 import useLogout from "@/hooks/users/useLogout"
 const Header = ()=>{
 const {logOutUser} = useLogout()
+
 return(
   <nav className="header navbar navbar-expand-lg bg-body-tertiary border-bottom col-12">
     <div className="container-fluid">

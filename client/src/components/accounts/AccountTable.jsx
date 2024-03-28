@@ -2,7 +2,7 @@ import AccountTableRow from "./AccountTableRow";
 
 const AccountTable = ()=>{
   return(
-    <table className="table table-sm table-bordered table-striped text-center">
+    <table className="table table-sm table-bordered table-striped text-center mt-2">
       <thead>
         <tr>
           <th className="text-secondary-emphasis" scope="col">Nombre</th>

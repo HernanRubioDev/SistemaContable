@@ -15,6 +15,7 @@ import LedgerBookForm from './components/books/LedgerBookForm'
 import { SessionProvider } from './context/SessionContext'
 import PrivateRoute from './components/middlewares/PrivateRoute'
 import PublicRoute from './components/middlewares/PublicRoute'
+
 function App() {
   return (
     <>
@@ -27,9 +28,9 @@ function App() {
           
           <Route path='/dashboard' element={<PrivateRoute component={ <Dashboard /> } />}/>
 
-          <Route path='/account/' element={<PrivateRoute component={ <Account /> } />}>
-            <Route path='add' element={<AddAccountForm />}/>
-            <Route path='search' element={<SearchAccountForm />}/>
+          <Route path='/account/' element={<PrivateRoute component={<Account />} />}>
+            <Route path='add' element={<AddAccountForm  />}/>
+            <Route path='search' element={<SearchAccountForm  />}/>
           </Route>
 
           <Route path='/movement/' element={<PrivateRoute component={ <Movement /> } />}>
@@ -41,7 +42,7 @@ function App() {
             <Route path='journal' element={<JournalBook />}/>
             <Route path='ledger' element={<LedgerBookForm />}/>
           </Route>
-          
+
         </Routes>
       </Router>
     </SessionProvider>

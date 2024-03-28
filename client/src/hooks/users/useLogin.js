@@ -32,6 +32,7 @@ const useLogin = ()=>{
 
         case res.status === 400:
           setLoginResponse({title: "Ups...", message:'Parece que ha ocurrindo un error. Inténtelo más tarde.', status:'danger'})
+          infoModal.show()
           break;
 
         case res.status === 404:
@@ -40,10 +41,12 @@ const useLogin = ()=>{
 
         default:
         setLoginResponse({title: "Ups...", message:'Parece que ha ocurrindo un error. Inténtelo más tarde.', status:'danger'})
+        infoModal.show()
           break;
       }
     } catch (error) {
       setLoginResponse({title: "Ups...", message:'Parece que ha ocurrindo un error. Inténtelo más tarde.', status:'danger'})
+      InfoToast.show()
     }finally{
       setLoginLoading(false)
     }
