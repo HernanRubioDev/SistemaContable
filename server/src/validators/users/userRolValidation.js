@@ -1,17 +1,11 @@
 
 const adminRolValidation = (roles)=>{
   const errors = {}
-  
   try {
     switch (true) {
       case !roles.includes("USER"):
         errors.message = "No tiene los permisos necesarios."
         errors.status = 403
-        break;
-    
-      default:
-        errors.message = "Ha ocurrido un error inesperado. Inténtelo más tarde."
-        errors.status = 500
         break;
     }
   } catch (error) {

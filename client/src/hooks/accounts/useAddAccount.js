@@ -1,7 +1,8 @@
-import { setAccount } from "@/services/accountService";
+import SessionContext from "@/context/SessionContext";
+import { setAccount} from "@/services/accountService";
 import isEmpty from "@/utils/isEmpty";
 import accountValidator from "@/validations/accountValidator";
-import { useState } from "react";
+import { useContext, useState } from "react";
 
 const useAddAccount = ()=>{
   const initialAccount = {
@@ -13,27 +14,32 @@ const useAddAccount = ()=>{
   const [account, setNewAccount] = useState(initialAccount)
   const [loading, setLoading] = useState(false)
   const [accountResponse, setAccountResponse] = useState({});
+  const {userSession} = useContext(SessionContext)
   const infoToast = new bootstrap.Toast(document.getElementById("infoToast"))
 
   const createAccount = async()=>{
+    const {auth_token} = userSession
     setLoading(true)
     try {
-      const res = await setAccount();
+      const res = await setAccount(account, auth_token);
       switch (true) {
         case res.status === 201:
-          console.log(201)
+          setAccountResponse({title:"Cuenta creada", message: res.message, success:true})
+          infoToast.show()
           break;
 
         case res.status === 400:
-          console.log(400)
+          setAccountResponse({title:"Error", message: res.message, success:false})
+          infoToast.show()
           break;
 
         case res.status === 403:
-          console.log(403)
+          setAccountResponse({title:"Error", message: res.message, success:false})
+          infoToast.show()
           break;
       
         default:
-          setAccountResponse({title:"Error", meesage:"Se ha producido un error. Inténtelo más tarde.", success:false})
+          setAccountResponse({title:"Error", message:"Se ha producido un error. Inténtelo más tarde.", success:false})
           infoToast.show()
           break;
       }

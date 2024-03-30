@@ -8,8 +8,8 @@ const accountValidator = (account)=>{
         errors.message = "El campo 'Nombre' es obligatorio."
         break;
 
-      case name.lengh < 3 || name.length > 10:
-        errors.message = "El campo 'Nombre' debe contener entre 3 y 10 caracteres."
+      case name.lengh < 3 || name.length > 20:
+        errors.message = "El campo 'Nombre' debe contener entre 3 y 20 caracteres."
         break;
 
       default:
@@ -56,7 +56,7 @@ const accountValidator = (account)=>{
         errors.message = "El campo 'Código' no puede estar vacio."
         break;
 
-      case !recive_credit && !codeRegEx.test(code):
+      case recive_credit==='true' && !codeRegEx.test(code):
         errors.message = "Formato de código inválido."
         break;
 

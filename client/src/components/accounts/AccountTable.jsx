@@ -1,6 +1,7 @@
 import AccountTableRow from "./AccountTableRow";
 
-const AccountTable = ()=>{
+const AccountTable = ({accounts})=>{
+  console.log(accounts)
   return(
     <table className="table table-sm table-bordered table-striped text-center mt-2">
       <thead>
@@ -13,7 +14,8 @@ const AccountTable = ()=>{
         </tr>
       </thead>
       <tbody>
-        <AccountTableRow />
+        {accounts.map(account => <AccountTableRow key={account.id_account} account={account}/>)}
+        
       </tbody>
     </table>
   );

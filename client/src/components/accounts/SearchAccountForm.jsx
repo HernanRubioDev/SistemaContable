@@ -1,9 +1,11 @@
 import useSearchAccount from "@/hooks/accounts/useSearchAccount";
 import AccountTable from "./AccountTable";
 import InfoToast from "../InfoToast";
+import Loader from "../Loader";
+import InfoModal from "../InfoModal";
 
 const SearchAccountForm = ()=>{
-  const {account, loading, errors, response, handleChange, handleSubmit, handleReset} = useSearchAccount()
+  const {account, loading, errors, response, handleChange, handleSubmit} = useSearchAccount()
   return(
     <>
     <div className="d-flex flex-column align-items-center flex-grow-1 bg-secondary-subtle px-3 h-100">
@@ -30,11 +32,11 @@ const SearchAccountForm = ()=>{
           <button type="submit" className="btn btn-sm btn-primary col-12 col-lg-2 d-flex justify-content-center align-items-center"><span className="material-symbols-outlined me-1">search</span>Buscar</button>
         </div>
         </form>
-        <AccountTable />
+        { loading ? <div className="d-flex flex-grow-1 justify-content-center"> <Loader /> </div> : <AccountTable accounts={response} /> }
       </div>
     </div>
-
     <InfoToast content={errors} />
+    <InfoModal content={errors} />
     </>
   );
 }

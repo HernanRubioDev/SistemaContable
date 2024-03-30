@@ -2,7 +2,7 @@ import isEmpty from "../../utils/isEmpty.js"
 import userRolValidation from "../../validators/users/userRolValidation.js"
 
 const userRolMiddleware = (req, res, next)=>{
-  const {roles} = req
+  const {roles} = req.user
   try {
     const errors = {...userRolValidation(roles)}
     isEmpty(errors) ? next() : res.status(errors.status).json({meesage: errors.message})

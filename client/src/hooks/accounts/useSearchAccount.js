@@ -1,5 +1,7 @@
+import SessionContext from "@/context/SessionContext";
 import { getAccount } from "@/services/accountService";
-import { useState } from "react";
+import { useContext, useState} from "react";
+import useLogout from "../users/useLogout";
 
 const useSearchAccount = ()=>{
   const initialAccount = {
@@ -9,8 +11,10 @@ const useSearchAccount = ()=>{
   }
   const [account, setNewAccount] = useState(initialAccount)
   const [loading, setLoading] = useState(false)
-  const [response, setResponse] = useState({});
+  const [response, setResponse] = useState([]);
   const [errors, setErrors] = useState({})
+  const {logOutUser} = useLogout()
+  const {userSession} = useContext(SessionContext)
   const infoToast = new bootstrap.Toast(document.getElementById("infoToast"))
 
   const handleChange = (e)=>{
@@ -26,14 +30,15 @@ const useSearchAccount = ()=>{
   }
 
   const handleReset = ()=>{
-    console.log("entro")
     setNewAccount(initialAccount);
   }
 
   const searchAccount = async (account)=>{
+    const infoModal = new bootstrap.Modal(document.getElementById('infoModal'))
     setLoading(true)
+    const {auth_token} = userSession
     try {
-      const res = await getAccount(account);
+      const res = await getAccount(account, auth_token);
       switch (true) {
         case res.status === 200:
           setResponse(res.accounts);
@@ -43,8 +48,18 @@ const useSearchAccount = ()=>{
           setErrors({title:"Error", message:res.message, success:false})
           break;
 
+        case res.status === 401:
+          setErrors({title:"Error.", message:res.message+' Será redirigido al login.', status:'danger'})
+          infoModal.show()
+          setTimeout(()=>{
+            infoModal.hide()
+            logOutUser()
+          },2500)
+          break;
+
         case res.status === 403:
-          setErrors({title:"Error", message:res.message, success:false})
+          setErrors({title:"Error", message:res.message, status:'danger'})
+          infoModal.show()
           break;
       
         default:

@@ -6,7 +6,7 @@ const authValidator = async (auth)=>{
   switch (true) {
     case auth.rowCount === 0 || auth === undefined:
       error.message="Usuario no autorizado."
-      error.status = 401
+      error.status = 403
       break;
 
     case auth.rows[0].expiration_date === today:

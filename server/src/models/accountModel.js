@@ -11,7 +11,7 @@ const getAccountByName = async (name) =>{
 }
 
 const getLastMajorAccountByType = async (account_type) =>{
-  const majorAccountQuery = "SELECT code FROM accounts WHERE account_type = $1 AND recive_credit = false ORDER BY code ASC LIMIT 1";
+  const majorAccountQuery = "SELECT code FROM accounts WHERE account_type = $1 AND recive_credit = false ORDER BY code DESC LIMIT 1";
   try {
     const res = pool.query(majorAccountQuery,[account_type]);
     return res
@@ -30,8 +30,8 @@ const getLastMinorAccountByCode = async (code, account_type) =>{
   }
 }
 
-const setAccount = async (account)=>{
-  const {name, recive_credit, account_type, id_user, code} = account
+const setAccount = async (account, id_user)=>{
+  const {name, recive_credit, account_type, code} = account
   try {
     const createAccountQuery = `
     INSERT INTO accounts (name, recive_credit, account_type, date_creation, id_user, code)
@@ -43,4 +43,18 @@ const setAccount = async (account)=>{
   }
 }
 
-export {getAccountByName, getLastMajorAccountByType, getLastMinorAccountByCode, setAccount}
+const getAccount = async (account) =>{
+  let {name, date_from, date_to} = account
+  const query = `
+  SELECT * FROM accounts a
+  WHERE a.name LIKE $1 AND a.date_creation BETWEEN $2 AND $3`
+  try {
+    const res = await pool.query(query, [`%${name}%`, date_from, date_to])
+    
+    return res
+  } catch (error) {
+    return null
+  }
+}
+
+export {getAccountByName, getLastMajorAccountByType, getLastMinorAccountByCode, setAccount, getAccount}
