@@ -3,13 +3,13 @@ import AccountTable from "./AccountTable";
 import InfoToast from "../InfoToast";
 import Loader from "../Loader";
 import InfoModal from "../InfoModal";
-
+import '@/stylesheets/SearchAccountForm.css'
 const SearchAccountForm = ()=>{
   const {account, loading, errors, response, handleChange, handleSubmit} = useSearchAccount()
   return(
     <>
     <div className="d-flex flex-column align-items-center flex-grow-1 bg-secondary-subtle px-3 h-100">
-      <div className="bg-white d-flex flex-column col-lg-10 col-12 rounded-2 p-3 shadow mt-2">
+      <div className="search-account-form bg-white d-flex flex-column col-lg-10 col-12 rounded-2 p-3 shadow mt-2">
         <div className="w-100">
           <h3 className="text-secondary fw-bold text-body-tertiary fs-5">Buscar cuenta</h3>
         </div>

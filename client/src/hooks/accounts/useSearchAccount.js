@@ -8,6 +8,8 @@ const useSearchAccount = ()=>{
     name:'',
     date_from:'',
     date_to: new Date().toISOString().slice(0, 10),
+    account_type:'',
+    recive_credit:''
   }
   const [account, setNewAccount] = useState(initialAccount)
   const [loading, setLoading] = useState(false)
@@ -45,7 +47,9 @@ const useSearchAccount = ()=>{
           break;
 
         case res.status === 404:
+          setResponse([])
           setErrors({title:"Error", message:res.message, success:false})
+          infoToast.show()
           break;
 
         case res.status === 401:
@@ -63,6 +67,7 @@ const useSearchAccount = ()=>{
           break;
       
         default:
+          setResponse([])
           setErrors({title:"Error", message:"Se ha producido un error. Inténtelo más tarde.", success:false})
           infoToast.show()
           break;

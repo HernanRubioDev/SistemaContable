@@ -44,13 +44,12 @@ const setAccount = async (account, id_user)=>{
 }
 
 const getAccount = async (account) =>{
-  let {name, date_from, date_to} = account
+  let {name, date_from, date_to, account_type, recive_credit} = account
   const query = `
-  SELECT * FROM accounts a
-  WHERE a.name LIKE $1 AND a.date_creation BETWEEN $2 AND $3`
+  SELECT *, to_char(date_creation, 'DD/MM/YYYY') AS date_creation FROM accounts
+  WHERE name LIKE $1 AND account_type LIKE $2 AND CAST(recive_credit AS VARCHAR(10)) LIKE $3 AND date_creation BETWEEN $4 AND $5`
   try {
-    const res = await pool.query(query, [`%${name}%`, date_from, date_to])
-    
+    const res = await pool.query(query, [`%${name}%`, `%${account_type}%`, `%${recive_credit}%` ,date_from, date_to])
     return res
   } catch (error) {
     return null

@@ -2,9 +2,10 @@ import { useEffect } from "react";
 import Loader from "../Loader";
 import useAddAccount from "@/hooks/accounts/useAddAccount";
 import InfoToast from "../InfoToast";
+import InfoModal from "../InfoModal";
 
 const AddAccountForm = ()=>{
-  const {account, loading, accountResponse, setNewAccount, handleChange, handleSubmit, handleReset} = useAddAccount()
+  const {account, loading, accountResponse, accounts, getAccounts, setNewAccount, handleChange, handleSubmit, handleReset} = useAddAccount()
   useEffect(()=>{
     if (account.recive_credit === 'false') {
       setNewAccount({
@@ -13,7 +14,7 @@ const AddAccountForm = ()=>{
       });
     }
   },[account.recive_credit])
-  
+
   return(
     <>
     <div className="d-flex flex-column align-items-center flex-grow-1 bg-secondary-subtle px-3 h-100">
@@ -39,12 +40,12 @@ const AddAccountForm = ()=>{
             <label className="form-label text-secondary fw-semibold m-0">Recibe crédito</label>
             <div className="d-flex align-items-center j gap-3 border h-100 rounded-1">
               <div className="d-flex ms-2">
-                <input onChange={(e)=>handleChange(e)} className="form-check-input" type="radio" id="reciveCreditTrue" name="recive_credit" value={true}/>
-                <label className="form-check-label ms-1" htmlFor="reciveCreditTrue">Sí </label>
+                <input onChange={(e)=>handleChange(e)} className="form-check-input" type="radio" id="reciveCreditFalse" name="recive_credit" value={true}/>
+                <label className="form-check-label ms-1" htmlFor="reciveCreditFalse">Sí </label>
               </div>
               <div className="d-flex">
-                <input onChange={(e)=>handleChange(e)} className="form-check-input" type="radio" id="reciveCreditFalse" name="recive_credit" value={false} defaultChecked/>
-                <label className="form-check-label ms-1" htmlFor="reciveCreditFalse">No </label>
+                <input onChange={(e)=>handleChange(e)} className="form-check-input" type="radio" id="reciveCreditTrue" name="recive_credit" value={false} defaultChecked/>
+                <label className="form-check-label ms-1" htmlFor="reciveCreditTrue">No </label>
               </div>
             </div>
           </div>
@@ -53,15 +54,16 @@ const AddAccountForm = ()=>{
           {account.recive_credit ?
           <div className="d-flex flex-column flex-grow-1">
           <label htmlFor="major_account" className="form-label text-secondary fw-semibold m-0">Cuenta</label>
-            <select onChange={(e)=>handleChange(e)} className="form-select" id="major_account" aria-label="Default select example" name="code" value={account.code} disabled={account.recive_credit==='false' && true}>
+            <select onChange={(e)=>handleChange(e)} onClick={()=>getAccounts()} className="form-select" id="major_account" aria-label="Default select example" name="code" value={account.code} disabled={account.recive_credit==='false' && true}>
               <option value="" disabled>Seleccina una cuenta</option>
-              <option value="1">Banco Rio</option>
-              <option value="1">Banco Nacion</option>
+              {accounts ? accounts.map((acc) => <option value={acc.code} key={acc.id_account}>{acc.name}</option>)
+              : <option value="" disabled>Cargando...</option>
+              }
             </select>
           </div> : ''}
           <div className="d-flex flex-column flex-grow-1">
             <label htmlFor="code" className="form-label text-secondary fw-semibold m-0">Código</label>
-            <input type="text" className={`form-control`} id="code" placeholder="Aquí aparecera el código de la cuenta" name="account_code" value={account.code} disabled/>
+            <input onChange={(e)=>handleChange(e)} type="text" className={`form-control`} id="code" placeholder="Aquí aparecera el código de la cuenta" name="account_code" value={account.code} disabled/>
           </div>
         </div>
         {loading ? 
@@ -76,6 +78,7 @@ const AddAccountForm = ()=>{
       </form>
     </div>
     <InfoToast content={accountResponse}/>
+    <InfoModal content={accountResponse}/>
     </>
   );
 }

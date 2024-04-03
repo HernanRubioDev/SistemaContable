@@ -1,5 +1,5 @@
 import SessionContext from "@/context/SessionContext";
-import { setAccount} from "@/services/accountService";
+import { getAccount, setAccount} from "@/services/accountService";
 import isEmpty from "@/utils/isEmpty";
 import accountValidator from "@/validations/accountValidator";
 import { useContext, useState } from "react";
@@ -9,11 +9,12 @@ const useAddAccount = ()=>{
     name:'',
     recive_credit:'false',
     account_type:'A',
-    code:''
+    code:'',
   }
   const [account, setNewAccount] = useState(initialAccount)
   const [loading, setLoading] = useState(false)
   const [accountResponse, setAccountResponse] = useState({});
+  const [accounts, setAccounts] = useState([])
   const {userSession} = useContext(SessionContext)
   const infoToast = new bootstrap.Toast(document.getElementById("infoToast"))
 
@@ -51,6 +52,49 @@ const useAddAccount = ()=>{
     }
   }
 
+  const getAccounts = async()=>{
+    const infoModal = new bootstrap.Modal(document.getElementById('infoModal'))
+    const {auth_token} = userSession
+    const acc = {...account, name:'', recive_credit:'false', date_to:'', date_from:''}
+    try {
+      const res = await getAccount(acc, auth_token)
+      switch (true) {
+        case res.status === 200:
+          setAccounts(res.accounts)
+          break;
+
+        case res.status === 404:
+          setAccounts([])
+          setAccountResponse({title:"Error", message:'No se han encontrado cuentas.', success:false})
+          infoToast.show()
+          break;
+
+        case res.status === 401:
+          setAccountResponse({title:"Error.", message:res.message+' Será redirigido al login.', status:'danger'})
+          infoModal.show()
+          setTimeout(()=>{
+            infoModal.hide()
+            logOutUser()
+          },2500)
+          break;
+      
+        case res.status === 403:
+          setAccountResponse({title:"Error", message:res.message, status:false})
+          infoModal.show()
+          break;
+          
+        default:
+          setAccountResponse({title:"Error", message:"Se ha producido un error. Inténtelo más tarde.", success:false})
+          infoToast.show()
+          break;
+      }
+    } catch (error) {
+      console.log(error)
+      setAccountResponse({title:"Error", message:"Se ha producido un error. Inténtelo más tarde.", success:false})
+      infoToast.show()
+    }
+  }
+
   const handleChange = (e)=>{
     setNewAccount({
       ...account,
@@ -74,6 +118,6 @@ const useAddAccount = ()=>{
     setNewAccount(initialAccount);
   }
 
-  return {account, loading, accountResponse, setNewAccount, handleChange, handleSubmit, handleReset}
+  return {account, loading, accountResponse, accounts, getAccounts, setNewAccount, handleChange, handleSubmit, handleReset}
 }
 export default useAddAccount;
