@@ -1,5 +1,6 @@
 import AddMovementTableRow from "./AddMovementTableRow"
-const AddMovementTable = ()=>{
+const AddMovementTable = ({movement, removeLine})=>{
+  const {lines} = movement
   return(
     <div className="movement-table overflow-y-auto">
       <table className="table table-sm table-bordered table-striped text-center">
@@ -12,7 +13,7 @@ const AddMovementTable = ()=>{
         </tr>
       </thead>
       <tbody >
-        <AddMovementTableRow />
+        {lines.map((line, index) => <AddMovementTableRow key={index} line={line} removeLine={removeLine}/>)}
       </tbody>
     </table>
     </div>
