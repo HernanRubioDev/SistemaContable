@@ -39,6 +39,7 @@ const setAccount = async (account, id_user)=>{
     const res = await pool.query(createAccountQuery, [name, recive_credit, account_type, id_user, code]);
     return res
   } catch (error) {
+    console.log(error)
     return null
   }
 }

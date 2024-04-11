@@ -6,7 +6,6 @@ const codeMiddleware = async (req, res, next)=>{
   switch (true) {
     case recive_credit === 'false':
       let last_major_code = await getLastMajorAccountByType(account_type)
-      console.log(last_major_code.rows)
       const major_account_code = generateMajorAccountCode(last_major_code, account_type);
       req.body.code = major_account_code;
       next()

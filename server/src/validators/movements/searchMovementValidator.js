@@ -1,12 +1,13 @@
-const searchAccountValidator = (account)=>{
-  const {date_from, date_to} = account
+const searchMovementValidator = (dates)=>{
+  const {date_from, date_to} = dates
   const dateFromValidation = (date_from)=>{
     const errors = {}
     const dateRegEx = /^([0-9]{4})-([0]{1}[1-9]|[12][0-9]|3[01])-([0]{1}[1-9]|1[0-2])$/
+
     switch (true) {
-      case date_from === '':
-        errors.message = "El campo 'Desde' es obligatorio."
-        errors.status = 400
+      case !date_from:
+        errors.message="La 'Fecha desde' es obligatoria"
+        errors.status=400
         break;
 
       case !dateRegEx.test(date_from):
@@ -14,15 +15,17 @@ const searchAccountValidator = (account)=>{
         errors.status = 400
         break
     }
+    
     return errors
   }
 
   const dateToValidation = (date_to)=>{
     const errors = {}
     const dateRegEx = /^([0-9]{4})-([0]{1}[1-9]|[12][0-9]|3[01])-([0]{1}[1-9]|1[0-2])$/
+
     switch (true) {
-      case date_to === '':
-        errors.message = "El campo 'Desde' es obligatorio."
+      case !date_to:
+        errors.message = "La 'Fecha hasta' es obligatoria"
         errors.status = 400
         break;
 
@@ -38,4 +41,4 @@ const searchAccountValidator = (account)=>{
   return errors
 }
 
-export default searchAccountValidator
+export default searchMovementValidator;

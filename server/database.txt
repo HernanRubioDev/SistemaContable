@@ -38,3 +38,22 @@ account_type VARCHAR(2) NOT NULL CHECK (account_type IN ('A','P','R+','R-')),
 date_creation DATE NOT NULL,
 id_user INTEGER NOT NULL, FOREIGN KEY (id_user) REFERENCES users(id_user)
 );
+
+CREATE TABLE lines (
+  id_line SERIAL PRIMARY KEY,
+  id_account INTEGER NOT NULL REFERENCES accounts(id_account),
+  move_type VARCHAR(50) NOT NULL,
+  line_amount DECIMAL(10,2) NOT NULL
+);
+
+CREATE TABLE moves (
+	id_move SERIAL PRIMARY KEY,
+	move_date DATE NOT NULL,
+	description VARCHAR(80) NOT NULL
+);
+
+CREATE TABLE moves_lines (
+  id_move INTEGER NOT NULL REFERENCES moves(id_move),
+  id_line INTEGER NOT NULL REFERENCES lines(id_line),
+  CONSTRAINT id_move_line PRIMARY KEY (id_move, id_line)
+);

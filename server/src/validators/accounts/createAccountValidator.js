@@ -2,7 +2,6 @@ import {getAccountByName} from '../../models/accountModel.js'
 
 const createAccountValidation = async (account)=>{
   const {name, recive_credit, account_type} = account
-
   const accountNameValidation = async(name)=>{
     const errors = {}
     const nameRegEx = /^[a-zA-Z ]+$/g;
