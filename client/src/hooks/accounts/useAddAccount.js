@@ -6,10 +6,10 @@ import { useContext, useState } from "react";
 
 const useAddAccount = ()=>{
   const initialAccount = {
-    name:'',
-    recive_credit:'false',
-    account_type:'A',
-    code:'',
+    name:"",
+    recive_credit:"false",
+    account_type:"A",
+    code:"",
   }
   const [account, setNewAccount] = useState(initialAccount)
   const [loading, setLoading] = useState(false)
@@ -53,9 +53,9 @@ const useAddAccount = ()=>{
   }
 
   const getAccounts = async()=>{
-    const infoModal = new bootstrap.Modal(document.getElementById('infoModal'))
+    const infoModal = new bootstrap.Modal(document.getElementById("infoModal"))
     const {auth_token} = userSession
-    const acc = {...account, name:'', recive_credit:'false', date_to:'', date_from:''}
+    const acc = {...account, name:"", recive_credit:"false", date_to:"", date_from:""}
     try {
       const res = await getAccount(acc, auth_token)
       switch (true) {
@@ -65,12 +65,12 @@ const useAddAccount = ()=>{
 
         case res.status === 404:
           setAccounts([])
-          setAccountResponse({title:"Error", message:'No se han encontrado cuentas.', success:false})
+          setAccountResponse({title:"Error", message:"No se han encontrado cuentas.", success:false})
           infoToast.show()
           break;
 
         case res.status === 401:
-          setAccountResponse({title:"Error.", message:res.message+' Será redirigido al login.', status:'danger'})
+          setAccountResponse({title:"Error.", message:res.message+" Será redirigido al login.", status:"danger"})
           infoModal.show()
           setTimeout(()=>{
             infoModal.hide()

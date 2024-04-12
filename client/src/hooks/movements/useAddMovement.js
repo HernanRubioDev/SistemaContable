@@ -2,6 +2,7 @@ import { useContext, useState} from "react";
 import SessionContext from "@/context/SessionContext";
 import useLogout from "../users/useLogout";
 import { getAccount } from "@/services/accountService";
+import { setNewMovement } from "@/services/movementService";
 
 const useAddMovement = ()=>{
   const initialMovement = {
@@ -84,11 +85,11 @@ const useAddMovement = ()=>{
   }
 
   const createMovement = async (movement)=>{
+    const {auth_token} = userSession
     const {movement_date, movement_description, lines} = movement
     const newMovement = {movement_date, movement_description, lines}
     try {
-      const res = await setMovement(newMovement)
-      console.log(res)
+      const res = await setNewMovement(newMovement, auth_token)
       switch (true) {
         case res.status === 201:
           setAccountResponse({title:"Asiento creado", message: res.message, success:true})

@@ -27,9 +27,23 @@ const setMovement = async (movement) => {
 
 const getMovement = async (dates)=>{
   const {date_from, date_to} = dates
-  const query = `SELECT *, to_char(move_date, 'DD/MM/YYYY') AS move_date FROM moves WHERE move_date BETWEEN $1 AND $2`
+  const moveQuery = `SELECT 
+  m.id_move,
+  to_char(m.move_date, 'DD/MM/YYYY') AS move_date,
+  m.description,
+  JSON_AGG(JSON_BUILD_OBJECT('move_type', l.move_type, 'line_amount', l.line_amount)) AS lines
+FROM 
+  moves m
+INNER JOIN 
+  moves_lines ml ON m.id_move = ml.id_move
+INNER JOIN 
+  lines l ON ml.id_line = l.id_line
+WHERE 
+  m.move_date BETWEEN $1 AND $2
+GROUP BY 
+  m.id_move, m.move_date, m.description;`
   try {
-    const res = await pool.query(query, [date_from, date_to])
+    const res = await pool.query(moveQuery, [date_from, date_to])
     return res
   } catch (error) {
     return null;

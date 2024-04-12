@@ -6,14 +6,16 @@ import InfoModal from "../InfoModal";
 
 const AddAccountForm = ()=>{
   const {account, loading, accountResponse, accounts, getAccounts, setNewAccount, handleChange, handleSubmit, handleReset} = useAddAccount()
+  
   useEffect(()=>{
-    if (account.recive_credit === 'false') {
-      setNewAccount({
-        ...account,
-        code: '',
-      });
+    if (account.recive_credit === "false") {
+      setNewAccount({ ...account, code: "", });
     }
-  },[account.recive_credit])
+    else{
+      setNewAccount({...account, code: "",})
+      getAccounts()
+    }
+  },[account.account_type, account.recive_credit])
 
   return(
     <>
@@ -54,11 +56,9 @@ const AddAccountForm = ()=>{
           {account.recive_credit ?
           <div className="d-flex flex-column flex-grow-1">
           <label htmlFor="major_account" className="form-label text-secondary fw-semibold m-0">Cuenta</label>
-            <select onChange={(e)=>handleChange(e)} onClick={()=>getAccounts()} className="form-select" id="major_account" aria-label="Default select example" name="code" value={account.code} disabled={account.recive_credit==='false' && true}>
+            <select onChange={(e)=>handleChange(e)} className="form-select" id="major_account" aria-label="Default select example" name="code" value={account.code} disabled={account.recive_credit==='false' && true}>
               <option value="" disabled>Seleccina una cuenta</option>
-              {accounts ? accounts.map((acc) => <option value={acc.code} key={acc.id_account}>{acc.name}</option>)
-              : <option value="" disabled>Cargando...</option>
-              }
+              {accounts && accounts.map((acc) => <option value={acc.code} key={acc.id_account}>{acc.name}</option>)}
             </select>
           </div> : ''}
           <div className="d-flex flex-column flex-grow-1">
