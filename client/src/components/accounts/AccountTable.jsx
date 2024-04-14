@@ -1,6 +1,6 @@
 import AccountTableRow from "./AccountTableRow";
 
-const AccountTable = ({accounts})=>{
+const AccountTable = ({accounts, handleDelete})=>{
   return(
     <div className="overflow-y-auto">
       <table className="table table-sm table-bordered table-striped text-center mt-2">
@@ -15,7 +15,7 @@ const AccountTable = ({accounts})=>{
         </thead>
         <tbody>
           {accounts.length !== 0 ? 
-          accounts.map(account => <AccountTableRow key={account.id_account} account={account}/>)
+          accounts.map(account => <AccountTableRow key={account.id_account} account={account} handleDelete={handleDelete}/>)
           :
           <tr><td colSpan='5'>Sin datos</td></tr>
           }

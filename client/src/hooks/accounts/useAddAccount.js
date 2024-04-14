@@ -11,9 +11,9 @@ const useAddAccount = ()=>{
     account_type:"A",
     code:"",
   }
-  const [account, setNewAccount] = useState(initialAccount)
+  const [accountForm, setNewAccount] = useState(initialAccount)
   const [loading, setLoading] = useState(false)
-  const [accountResponse, setAccountResponse] = useState({});
+  const [response, setAccountResponse] = useState({});
   const [accounts, setAccounts] = useState([])
   const {userSession} = useContext(SessionContext)
   const infoToast = new bootstrap.Toast(document.getElementById("infoToast"))
@@ -22,7 +22,7 @@ const useAddAccount = ()=>{
     const {auth_token} = userSession
     setLoading(true)
     try {
-      const res = await setAccount(account, auth_token);
+      const res = await setAccount(accountForm, auth_token);
       switch (true) {
         case res.status === 201:
           setAccountResponse({title:"Cuenta creada", message: res.message, success:true})
@@ -55,7 +55,7 @@ const useAddAccount = ()=>{
   const getAccounts = async()=>{
     const infoModal = new bootstrap.Modal(document.getElementById("infoModal"))
     const {auth_token} = userSession
-    const acc = {...account, name:"", recive_credit:"false", date_to:"", date_from:""}
+    const acc = {...accountForm, name:"", recive_credit:"false", date_to:"", date_from:""}
     try {
       const res = await getAccount(acc, auth_token)
       switch (true) {
@@ -96,14 +96,14 @@ const useAddAccount = ()=>{
 
   const handleChange = (e)=>{
     setNewAccount({
-      ...account,
+      ...accountForm,
       [e.target.name]: e.target.value
     })
   }
 
   const handleSubmit = (e)=>{
     e.preventDefault()
-    const errors = accountValidator(account);
+    const errors = accountValidator(accountForm);
     if(isEmpty(errors)){
       createAccount()
     }
@@ -117,6 +117,6 @@ const useAddAccount = ()=>{
     setNewAccount(initialAccount);
   }
 
-  return {account, loading, accountResponse, accounts, getAccounts, setNewAccount, handleChange, handleSubmit, handleReset}
+  return {accountForm, loading, response, accounts, getAccounts, setNewAccount, handleChange, handleSubmit, handleReset}
 }
 export default useAddAccount;

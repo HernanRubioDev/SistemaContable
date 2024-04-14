@@ -31,13 +31,15 @@ const getMovement = async (dates)=>{
   m.id_move,
   to_char(m.move_date, 'DD/MM/YYYY') AS move_date,
   m.description,
-  JSON_AGG(JSON_BUILD_OBJECT('move_type', l.move_type, 'line_amount', l.line_amount)) AS lines
+  JSON_AGG(JSON_BUILD_OBJECT('move_type', l.move_type, 'line_amount', l.line_amount, 'account', a.name)) AS lines
 FROM 
   moves m
 INNER JOIN 
   moves_lines ml ON m.id_move = ml.id_move
 INNER JOIN 
   lines l ON ml.id_line = l.id_line
+INNER JOIN 
+  accounts a ON a.id_account = l.id_account
 WHERE 
   m.move_date BETWEEN $1 AND $2
 GROUP BY 

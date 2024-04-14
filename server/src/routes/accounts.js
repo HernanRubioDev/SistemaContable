@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { createAccount, searchAccount } from "../controllers/accountController.js";
+import { createAccount, deleteAccount, searchAccount } from "../controllers/accountController.js";
 import authMiddleware from "../middlewares/users/authMiddleware.js";
 import createAccountMiddleware from "../middlewares/accounts/createAccountMiddlewre.js";
 import codeMiddleware from "../middlewares/accounts/codeMiddleware.js";
@@ -10,5 +10,6 @@ const accountRouter = Router();
 
 accountRouter.post("/:auth_token", authMiddleware, createAccountMiddleware, codeMiddleware, createAccount);
 accountRouter.get("/:auth_token", authMiddleware, userRolMiddleware, searchAccountMiddleware, searchAccount);
+accountRouter.delete("/:auth_token", authMiddleware, deleteAccount);
 
 export default accountRouter;

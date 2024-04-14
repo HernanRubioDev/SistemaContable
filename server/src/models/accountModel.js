@@ -57,4 +57,16 @@ const getAccount = async (account) =>{
   }
 }
 
-export {getAccountByName, getLastMajorAccountByType, getLastMinorAccountByCode, setAccount, getAccount}
+const dropAccount = async (account)=>{
+  const {id_account} = account
+  const query = "DELETE FROM accounts * WHERE id_account = $1;"
+  try {
+    const res = await pool.query(query, [id_account])
+    return res
+  } catch (error) {
+    console.log(error)
+    return null
+  }
+}
+
+export {getAccountByName, getLastMajorAccountByType, getLastMinorAccountByCode, setAccount, getAccount, dropAccount}

@@ -1,4 +1,4 @@
-import { getAccount, setAccount } from "../models/accountModel.js";
+import { dropAccount, getAccount, setAccount } from "../models/accountModel.js";
 
 const createAccount = async(req, res)=>{
   const account = req.body
@@ -8,6 +8,24 @@ const createAccount = async(req, res)=>{
     switch (true) {
       case response.rowCount !== 0:
         res.status(201).json({status: 201, message: `La cuenta ${account.name} se creó correctamente.`});
+        break;
+    
+      default:
+        res.status(500).json({status:500, message: "Se ha producido un error inesperado. Inténtelo mas tarde."});
+        break;
+    }
+  } catch (error) {
+    res.status(500).json({status:500, message: "Se ha producido un error inesperado. Inténtelo mas tarde."});
+  }
+}
+
+const deleteAccount = async(req, res)=>{
+  const account = req.body
+  try {
+    const response = await dropAccount(account)
+    switch (true) {
+      case response.rowCount !== 0:
+        res.status(201).json({status: 200, message: `La cuenta ${account.name} fue eliminada.`});
         break;
     
       default:
@@ -41,4 +59,4 @@ const searchAccount = async (req, res)=>{
   }
 }
 
-export {createAccount, searchAccount};
+export {createAccount, searchAccount, deleteAccount};

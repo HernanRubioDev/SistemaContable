@@ -23,11 +23,11 @@ const AddMovementForm = ()=>{
         <div className="d-flex flex-wrap column-gap-3">
           <div className="flex-grow-1">
             <label htmlFor="movementDate" className="form-label text-secondary fw-semibold m-0">Fecha</label>
-            <input onChange={(e)=>{handleChange(e)}} type="date" className={`form-control`} id="movementDate" placeholder="Ej: Banco Río" name="movement_date" value={movement.movement_date}/>
+            <input onChange={(e)=>{handleChange(e)}} type="date" className={`form-control`} id="movementDate" placeholder="Ej: Banco Río" name="movement_date" value={movement.movement_date} max={new Date().toISOString().slice(0, 10)}/>
           </div>
           <div className="flex-grow-1">
             <label htmlFor="movementAmmount" className="form-label text-secondary fw-semibold m-0">Monto</label>
-            <input onChange={(e)=>{handleChange(e)}} type="number" className={`form-control`} id="movementAmmount" placeholder="$" name="movement_ammount" value={movement.movement_ammount} min='0'/>
+            <input onChange={(e)=>{handleChange(e)}} type="number" className={`form-control`} id="movementAmmount" placeholder="$" name="movement_ammount" value={movement.movement_ammount} min='0' autoFocus/>
           </div>
           </div>
           <div className="d-flex flex-wrap column-gap-3">

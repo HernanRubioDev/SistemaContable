@@ -34,6 +34,7 @@ const useSearchMovement = ()=>{
   const handleReset = ()=>{
     setDates(initialDates)
     setMovements([])
+    setLines([])
   }
 
   const searchMovement = async (dates)=>{
@@ -84,7 +85,6 @@ const useSearchMovement = ()=>{
   const searchLines = (id_move)=>{
     const infoModal = new bootstrap.Modal(document.getElementById('infoModal'))
     const move = movements.find(move => move.id_move === id_move)
-    console.log(move.lines)
     setResponse({title: move.description, status:'secondary'})
     setLines(move.lines)
     infoModal.show()

@@ -5,17 +5,17 @@ import InfoToast from "../InfoToast";
 import InfoModal from "../InfoModal";
 
 const AddAccountForm = ()=>{
-  const {account, loading, accountResponse, accounts, getAccounts, setNewAccount, handleChange, handleSubmit, handleReset} = useAddAccount()
+  const {accountForm, loading, response, accounts, getAccounts, setNewAccount, handleChange, handleSubmit, handleReset} = useAddAccount()
   
   useEffect(()=>{
-    if (account.recive_credit === "false") {
-      setNewAccount({ ...account, code: "", });
+    if (accountForm.recive_credit === "false") {
+      setNewAccount({ ...accountForm, code: "", });
     }
     else{
-      setNewAccount({...account, code: "",})
+      setNewAccount({...accountForm, code: "",})
       getAccounts()
     }
-  },[account.account_type, account.recive_credit])
+  },[accountForm.account_type, accountForm.recive_credit])
 
   return(
     <>
@@ -27,11 +27,11 @@ const AddAccountForm = ()=>{
         <div className="d-flex flex-grow-1 gap-3 flex-wrap">
           <div className="flex-grow-1">
             <label htmlFor="accountName" className="form-label text-secondary fw-semibold m-0">Nombre</label>
-            <input onChange={(e)=>handleChange(e)} type="text" className={`form-control`} id="accountName" placeholder="Ej: Banco Río" name="name" value={account.name}/>
+            <input onChange={(e)=>handleChange(e)} type="text" className={`form-control`} id="accountName" placeholder="Ej: Banco Río" name="name" value={accountForm.name} autoFocus/>
           </div>
           <div className="flex-grow-1">
             <label htmlFor="account_type" className="form-label text-secondary fw-semibold m-0">Tipo</label>
-            <select onChange={(e)=>handleChange(e)} className="form-select" id="account_type" aria-label="Default select example" name="account_type" value={account.account_type}>
+            <select onChange={(e)=>handleChange(e)} className="form-select" id="account_type" aria-label="Default select example" name="account_type" value={accountForm.account_type}>
               <option value="A">Activo</option>
               <option value="P">Pasivo</option>
               <option value="R+">Resultado positivo</option>
@@ -53,17 +53,17 @@ const AddAccountForm = ()=>{
           </div>
         </div>
         <div className="d-flex gap-3">
-          {account.recive_credit ?
+          {accountForm.recive_credit ?
           <div className="d-flex flex-column flex-grow-1">
           <label htmlFor="major_account" className="form-label text-secondary fw-semibold m-0">Cuenta</label>
-            <select onChange={(e)=>handleChange(e)} className="form-select" id="major_account" aria-label="Default select example" name="code" value={account.code} disabled={account.recive_credit==='false' && true}>
+            <select onChange={(e)=>handleChange(e)} className="form-select" id="major_account" aria-label="Default select example" name="code" value={accountForm.code} disabled={accountForm.recive_credit==='false' && true}>
               <option value="" disabled>Seleccina una cuenta</option>
               {accounts && accounts.map((acc) => <option value={acc.code} key={acc.id_account}>{acc.name}</option>)}
             </select>
           </div> : ''}
           <div className="d-flex flex-column flex-grow-1">
             <label htmlFor="code" className="form-label text-secondary fw-semibold m-0">Código</label>
-            <input onChange={(e)=>handleChange(e)} type="text" className={`form-control`} id="code" placeholder="Aquí aparecera el código de la cuenta" name="account_code" value={account.code} disabled/>
+            <input onChange={(e)=>handleChange(e)} type="text" className={`form-control`} id="code" placeholder="Aquí aparecera el código de la cuenta" name="account_code" value={accountForm.code} disabled/>
           </div>
         </div>
         {loading ? 
@@ -77,8 +77,8 @@ const AddAccountForm = ()=>{
         }
       </form>
     </div>
-    <InfoToast content={accountResponse}/>
-    <InfoModal content={accountResponse}/>
+    <InfoToast content={response}/>
+    <InfoModal content={response}/>
     </>
   );
 }
