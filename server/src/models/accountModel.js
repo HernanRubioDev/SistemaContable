@@ -39,7 +39,6 @@ const setAccount = async (account, id_user)=>{
     const res = await pool.query(createAccountQuery, [name, recive_credit, account_type, id_user, code]);
     return res
   } catch (error) {
-    console.log(error)
     return null
   }
 }
@@ -64,9 +63,18 @@ const dropAccount = async (account)=>{
     const res = await pool.query(query, [id_account])
     return res
   } catch (error) {
-    console.log(error)
     return null
   }
 }
 
-export {getAccountByName, getLastMajorAccountByType, getLastMinorAccountByCode, setAccount, getAccount, dropAccount}
+const getAccountsByCode = async (code)=>{
+ const query = "SELECT * from accounts WHERE code LIKE $1"
+ try {
+    const res = await pool.query(query, [`${code}%`]);
+    return res
+ } catch (error) {
+    return null
+ }
+}
+
+export {getAccountByName, getLastMajorAccountByType, getLastMinorAccountByCode, setAccount, getAccount, dropAccount, getAccountsByCode}

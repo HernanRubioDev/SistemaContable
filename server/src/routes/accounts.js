@@ -5,11 +5,13 @@ import createAccountMiddleware from "../middlewares/accounts/createAccountMiddle
 import codeMiddleware from "../middlewares/accounts/codeMiddleware.js";
 import searchAccountMiddleware from "../middlewares/accounts/searchAccountMiddleware.js";
 import userRolMiddleware from "../middlewares/users/userRolMiddleware.js";
+import accountDataMiddleware from "../middlewares/accounts/accountDataMiddleware.js";
+import deleteAccountMiddleware from "../middlewares/accounts/deleteAccountMiddleware.js";
 
 const accountRouter = Router();
 
 accountRouter.post("/:auth_token", authMiddleware, createAccountMiddleware, codeMiddleware, createAccount);
 accountRouter.get("/:auth_token", authMiddleware, userRolMiddleware, searchAccountMiddleware, searchAccount);
-accountRouter.delete("/:auth_token", authMiddleware, deleteAccount);
+accountRouter.delete("/:auth_token", authMiddleware, accountDataMiddleware, deleteAccountMiddleware, deleteAccount);
 
 export default accountRouter;

@@ -52,4 +52,14 @@ GROUP BY
   }
 }
 
-export {setMovement, getMovement}
+const getMovementsCountByAccountId = async (id_account)=>{
+  const query = "SELECT COUNT(*) FROM lines WHERE id_account = $1"
+  try {
+    const res = await pool.query(query,[id_account])
+    return res
+  } catch (error) {
+    return null
+  }
+}
+
+export {setMovement, getMovement, getMovementsCountByAccountId}

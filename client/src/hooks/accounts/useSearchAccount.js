@@ -111,6 +111,11 @@ const useSearchAccount = ()=>{
           infoToast.show()
           break;
   
+        case res.status === 403:
+          setResponse({title:"Error", message:res.message, success: false})
+          infoToast.show()
+          break;
+  
         case res.status === 404:
           setResponse({title:"Error", message:res.message, success: false})
           infoToast.show()
