@@ -1,5 +1,4 @@
-const searchMovementValidator = (dates)=>{
-  const {date_from, date_to} = dates
+
   const dateFromValidation = (date_from)=>{
     const errors = {}
     const dateRegEx = /^([0-9]{4})-([0]{1}[1-9]|1[0-2])-([0]{1}[1-9]|[12][0-9]|3[01])$/
@@ -15,7 +14,6 @@ const searchMovementValidator = (dates)=>{
         errors.status = 400
         break
     }
-    
     return errors
   }
 
@@ -37,8 +35,5 @@ const searchMovementValidator = (dates)=>{
     return errors
   }
 
-  const errors = {...dateFromValidation(date_from), ...dateToValidation(date_to)}
-  return errors
-}
 
-export default searchMovementValidator;
+export {dateFromValidation, dateToValidation};

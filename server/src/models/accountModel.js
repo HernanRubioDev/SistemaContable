@@ -77,4 +77,16 @@ const getAccountsByCode = async (code)=>{
  }
 }
 
-export {getAccountByName, getLastMajorAccountByType, getLastMinorAccountByCode, setAccount, getAccount, dropAccount, getAccountsByCode}
+const pathAccountName = async (account)=>{
+  const {name, id_account} = account
+  const query = "UPDATE accounts SET name = $1 WHERE id_account = $2"
+  try {
+    const res = await pool.query(query, [name, id_account])
+    return res
+  } catch (error) {
+    console.log(error)
+    return null
+  }
+}
+
+export {getAccountByName, getLastMajorAccountByType, getLastMinorAccountByCode, setAccount, getAccount, dropAccount, getAccountsByCode, pathAccountName}

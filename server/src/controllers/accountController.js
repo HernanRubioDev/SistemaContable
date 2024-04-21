@@ -1,4 +1,4 @@
-import { dropAccount, getAccount, setAccount } from "../models/accountModel.js";
+import { dropAccount, getAccount, pathAccountName, setAccount } from "../models/accountModel.js";
 
 const createAccount = async(req, res)=>{
   const account = req.body
@@ -59,4 +59,27 @@ const searchAccount = async (req, res)=>{
   }
 }
 
-export {createAccount, searchAccount, deleteAccount};
+const editAccountName = async  (req, res)=>{
+  const account = req.body
+  try {
+    const response = await pathAccountName(account);
+    switch (true) {
+      case response.rowCount !== 0:
+        res.status(200).json({status: 200, message: "La cuenta ha sido modificada."})
+        break;
+
+      case response.rowCount !== 0:
+        res.status(404).json({status: 404, message: "No se ha encontrado la cuenta a modificar."})
+        break;
+    
+      default:
+        console.log("entro")
+        res.status(500).json({status:500, message: "Se ha producido un error inesperado. Inténtelo mas tarde."});
+        break;
+    }
+  } catch (error) {
+      res.status(500).json({status:500, message: "Se ha producido un error inesperado. Inténtelo mas tarde."});
+  }
+}
+
+export {createAccount, searchAccount, deleteAccount, editAccountName};

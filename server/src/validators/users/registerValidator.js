@@ -1,13 +1,8 @@
-import {pool} from '../../../db.cjs'
-import { getUserByEmail } from '../../models/userModel.js';
-
-const registerValidator = async (user)=>{
-  
-  const {name, last_name, email, password, re_password} = user
-  const nameRegEx = /^[a-zA-Z ]+$/g;
+import { getUserByEmail } from "../../models/userModel.js";
 
   const nameValidation = (name)=>{
     const  error = {}
+    const nameRegEx = /^[a-zA-Z ]+$/g;
     switch (true) {
       case !name:
         error.name = "El campo 'Nombre' es obligatorio."
@@ -123,8 +118,5 @@ const registerValidator = async (user)=>{
     return errors
   }
 
-  const errors = {...nameValidation(name), ...lastNameValidation(last_name), ...await emailValidation(email), ...passwordValidator(password, re_password)}
-  return errors
-}
 
-export default registerValidator;
+export {nameValidation, lastNameValidation, emailValidation, passwordValidator};

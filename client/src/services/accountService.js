@@ -43,11 +43,27 @@ const deleteAccount = async (account, auth_token)=>{
   }
   try {
     const res = await fetch(API_URL, options).then(res => res.json());
-    console.log(res)
     return res
   } catch (error) {
     return null
   }
 }
 
-export {setAccount, getAccount, deleteAccount}
+const patchAccount = async(account, auth_token)=>{
+  const API_URL = `http://localhost:3000/accounts/${auth_token}`
+  const options = {
+    method: 'PATCH',
+    headers:{
+      "content-type":"application/json"
+    },
+    body: JSON.stringify(account)
+  }
+  try {
+    const res = await fetch(API_URL, options).then(res => res.json());
+    return res
+  } catch (error) {
+    return null
+  }
+}
+
+export {setAccount, getAccount, deleteAccount, patchAccount}

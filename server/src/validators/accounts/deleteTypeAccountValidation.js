@@ -1,9 +1,7 @@
 import { getAccountsByCode } from "../../models/accountModel.js"
 import { getMovementsCountByAccountId } from "../../models/movementModel.js"
 
-const deleteTypeAccountValidation = async (account)=>{
-  const {recive_credit, id_account, code} = account
-  const movementQuantityValidation = async ()=>{
+  const movementQuantityValidation = async (id_account)=>{
     const errors = {}
     const res = await getMovementsCountByAccountId(id_account)
     switch (true) {
@@ -28,14 +26,4 @@ const deleteTypeAccountValidation = async (account)=>{
     return errors
   }
 
-  if(recive_credit){
-    const errors = {...await movementQuantityValidation(id_account)}
-    return errors
-  }
-  if(!recive_credit){
-    const errors = {...await minorAccountValidaton(code)}
-    return errors
-  }
-}
-
-export default deleteTypeAccountValidation
+export {movementQuantityValidation, minorAccountValidaton}

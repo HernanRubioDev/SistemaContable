@@ -12,7 +12,7 @@ const codeMiddleware = async (req, res, next)=>{
       break;
   
     case recive_credit === 'true':
-      const last_minor_code = await getLastMinorAccountByCode(code.slice(0,3), account_type);//ARREGLAR LA CONSULTA YA QUE NO ESTA ANDANDO
+      const last_minor_code = await getLastMinorAccountByCode(code.slice(0,3), account_type);
       const minor_account_code = generateMinorAccountCode(last_minor_code, code);
       req.body.code = minor_account_code;
       next()

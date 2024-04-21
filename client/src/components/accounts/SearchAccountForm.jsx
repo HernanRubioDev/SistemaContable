@@ -4,8 +4,10 @@ import InfoToast from "../InfoToast";
 import Loader from "../Loader";
 import InfoModal from "../InfoModal";
 import '@/stylesheets/SearchAccountForm.css'
+import AccountEditForm from "./AccountEditForm";
+import EditModal from "./EditAccountModal";
 const SearchAccountForm = ()=>{
-  const {accountForm, loading, response, accounts, accountToDelete, handleChange, handleSubmit, handleDelete} = useSearchAccount()
+  const {accountForm, loading, response, accounts, accountToEdit, handleChange, handleSubmit, handleDelete, handleEdit, handleAccountToEdit, editAccount} = useSearchAccount()
   return(
     <>
     <div className="d-flex flex-column align-items-center flex-grow-1 bg-secondary-subtle px-3 h-100">
@@ -32,11 +34,12 @@ const SearchAccountForm = ()=>{
           <button type="submit" className="btn btn-sm btn-primary col-12 col-lg-2 d-flex justify-content-center align-items-center"><span className="material-symbols-outlined me-1">search</span>Buscar</button>
         </div>
         </form>
-        { loading ? <div className="d-flex flex-grow-1 justify-content-center"> <Loader /> </div> : <AccountTable accounts={accounts} handleDelete={handleDelete} /> }
+        { loading ? <div className="d-flex flex-grow-1 justify-content-center"> <Loader /> </div> : <AccountTable accounts={accounts} handleDelete={handleDelete} handleEdit={handleEdit}/> }
       </div>
     </div>
     <InfoToast content={response}/>
-    <InfoModal content={response}/>
+    <InfoModal content={response} />
+    <EditModal content={response} accountToEdit={accountToEdit} handleAccountToEdit={handleAccountToEdit} editAccount={editAccount}/>
     </>
   );
 }
