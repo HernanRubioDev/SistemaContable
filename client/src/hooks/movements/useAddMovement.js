@@ -7,7 +7,7 @@ import { setNewMovement } from "@/services/movementService";
 const useAddMovement = ()=>{
   const initialMovement = {
     movement_date: new Date().toISOString().slice(0, 10),
-    movement_ammount:'',
+    movement_amount:'',
     movement_account:'',
     movement_type:'debit',
     movement_description:'',
@@ -73,7 +73,7 @@ const useAddMovement = ()=>{
   const addLine = (movement)=>{
     setMovement({
       ...movement,
-      lines: [...movement.lines, {account: movement.movement_account, type: movement.movement_type, ammount: movement.movement_ammount}]
+      lines: [...movement.lines, {account: movement.movement_account, type: movement.movement_type, amount: movement.movement_amount}]
     })
   }
 

@@ -1,6 +1,6 @@
 
 import isEmpty from "../../utils/isEmpty.js"
-import { dateFromValidation, dateToValidation } from "../../validators/accounts/accountDataValidation.js"
+import { dateFromValidation, dateToValidation } from "../../validators/movements/dataMovementValidator.js"
 
 const searchMovementMiddleware = (req, res, next) => {
   const dates = req.query

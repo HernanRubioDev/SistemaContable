@@ -72,7 +72,7 @@ const AddAccountForm = ()=>{
         </div> :
         <div className="d-flex flex-wrap justify-content-lg-end gap-2">
           <button onClick={()=>handleReset()} type="reset" className="btn btn-sm btn-secondary col-12 col-lg-2 d-flex justify-content-center align-items-center"><span className="material-symbols-outlined me-2">ink_eraser</span>Limpiar</button>
-          <button type="submit" className="btn btn-sm btn-primary col-12 col-lg-2 d-flex justify-content-center align-items-center"><span className="material-symbols-outlined me-2">save</span>Agregar</button>
+          <button type="submit" className="btn btn-sm btn-primary col-12 col-lg-2 d-flex justify-content-center align-items-center"disabled={accountForm.name==="" ? true : false}><span className="material-symbols-outlined me-2">save</span>Agregar</button>
         </div>
         }
       </form>

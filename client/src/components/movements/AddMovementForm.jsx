@@ -8,7 +8,7 @@ import Loader from '../Loader';
 
 const AddMovementForm = ()=>{
   const {movement, accounts, accountResponse, loading, handleChange, getAccounts, createMovement, addLine, removeLine} = useAddMovement()
-  const {movement_account, movement_ammount, movement_description, lines} = movement
+  const {movement_account, movement_amount, movement_description, lines} = movement
   useEffect(()=>{
     if(accounts.length === 0) getAccounts()
   },[])
@@ -27,7 +27,7 @@ const AddMovementForm = ()=>{
           </div>
           <div className="flex-grow-1">
             <label htmlFor="movementAmmount" className="form-label text-secondary fw-semibold m-0">Monto</label>
-            <input onChange={(e)=>{handleChange(e)}} type="number" className={`form-control`} id="movementAmmount" placeholder="$" name="movement_ammount" value={movement.movement_ammount} min='0' autoFocus/>
+            <input onChange={(e)=>{handleChange(e)}} type="number" className={`form-control`} id="movementAmmount" placeholder="$" name="movement_amount" value={movement.movement_amount} min='0' autoFocus/>
           </div>
           </div>
           <div className="d-flex flex-wrap column-gap-3">
@@ -59,7 +59,7 @@ const AddMovementForm = ()=>{
           {loading ? <div className='d-flex justify-content-center'><Loader /></div> 
           :  
           <div className='d-flex flex-wrap column-gap-3 row-gap-2'>
-            <button type='button' onClick={()=>addLine(movement)} className='btn btn-sm btn-secondary d-flex flex-grow-1 justify-content-center' disabled={movement_ammount==='' || movement_account==='' || movement_description===''}><span className="material-symbols-outlined me-1">add</span>Agregar</button>
+            <button type='button' onClick={()=>addLine(movement)} className='btn btn-sm btn-secondary d-flex flex-grow-1 justify-content-center' disabled={movement_amount==='' || movement_account==='' || movement_description===''}><span className="material-symbols-outlined me-1">add</span>Agregar</button>
             <button type='button' onClick={()=>createMovement(movement)} className='btn btn-sm btn-success d-flex flex-grow-1 justify-content-center' disabled={lines.length < 2} ><span className="material-symbols-outlined me-2">save</span>Registrar</button>
           </div>
           }
