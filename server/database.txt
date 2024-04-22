@@ -36,7 +36,8 @@ recive_credit BOOLEAN NOT NULL,
 code VARCHAR(5) NOT NULL UNIQUE,
 account_type VARCHAR(2) NOT NULL CHECK (account_type IN ('A','P','R+','R-')),
 date_creation DATE NOT NULL,
-id_user INTEGER NOT NULL, FOREIGN KEY (id_user) REFERENCES users(id_user)
+id_user INTEGER NOT NULL, FOREIGN KEY (id_user) REFERENCES users(id_user),
+partial_credit FLOAT DEFAULT 0 CHECK (partial_credit >= 0)
 );
 
 CREATE TABLE lines (

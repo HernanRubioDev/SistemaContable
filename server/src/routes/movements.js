@@ -6,7 +6,7 @@ import createMovementMiddleware from "../middlewares/movements/createMovementMid
 
 const movementRouter = Router();
 
-movementRouter.post("/:auth_token", authMiddleware, createMovementMiddleware/*, createMovement*/)
+movementRouter.post("/:auth_token", authMiddleware, createMovementMiddleware, createMovement)
 
 movementRouter.get("/:auth_token", authMiddleware, searchMovementMiddleware, searchMovementByDates)
 
