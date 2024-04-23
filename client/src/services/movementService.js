@@ -26,6 +26,7 @@ const getMovementByDates = async(dates, auth_token)=>{
   }
   try {
     const res = await fetch(API_URL, options).then(res => res.json());
+    console.table(res)
     return res
   } catch (error) {
     return null

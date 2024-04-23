@@ -36,6 +36,7 @@ const AddAccountForm = ()=>{
               <option value="P">Pasivo</option>
               <option value="R+">Resultado positivo</option>
               <option value="R-">Resultado negativo</option>
+              <option value="Pa">Patrimonio</option>
             </select>
           </div>
           <div className="d-flex flex-column flex-grow-1">

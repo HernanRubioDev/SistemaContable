@@ -59,7 +59,7 @@ const accountNameValidation = (name)=>{
 
 const accountTypeValidation = (account_type)=>{
   const errors = {}
-  const types = ['A','P','R-','R+']
+  const types = ['A','P','R-','R+', 'Pa']
   switch (true) {
     case !account_type:
       errors.message="El campo 'Tipo de Cunta' es obligatorio."

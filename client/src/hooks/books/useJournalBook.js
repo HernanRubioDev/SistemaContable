@@ -4,15 +4,14 @@ import { default as useLogout } from "../users/useLogout";
 import { useState } from "react";
 import { getMovementByDates } from "@/services/movementService";
 
-const useSearchMovement = ()=>{
+const useJournalBook = ()=>{
   const initialDates = {
     date_from:'',
-    date_to:new Date().toISOString().slice(0, 10),
+    date_to:'',
   }
   const [dates, setDates] = useState(initialDates)
   const [loading, setLoading] = useState(false)
   const [movements, setMovements] = useState([])
-  const [lines, setLines] = useState([])
   const [response, setResponse] = useState({})
   const infoToast = new bootstrap.Toast(document.getElementById("infoToast"))
   const {logOutUser} = useLogout()
@@ -25,18 +24,13 @@ const useSearchMovement = ()=>{
     })
   }
 
-  const handleSubmit = (e, dates)=>{
-    e.preventDefault()
-    searchMovement(dates)
-  }
-
   const handleReset = ()=>{
     setDates(initialDates)
     setMovements([])
-    setLines([])
   }
 
-  const searchMovement = async (dates)=>{
+  const searchJournalBook = async (e, dates)=>{
+    e.preventDefault()
     setLoading(true)
     const {auth_token} = userSession
     const infoModal = new bootstrap.Modal(document.getElementById('infoModal'))
@@ -80,16 +74,7 @@ const useSearchMovement = ()=>{
       setLoading(false)
     }
   }
-
-  const searchLines = (id_move)=>{
-    const infoModal = new bootstrap.Modal(document.getElementById('infoModal'))
-    const move = movements.find(move => move.id_move === id_move)
-    setResponse({title: move.description, status:'secondary'})
-    setLines(move.lines)
-    infoModal.show()
-  }
-
-  return {dates, loading, movements, response, lines, handleChange, handleSubmit, handleReset, searchLines}
+  return {dates, loading, movements, response, handleChange, handleReset, searchJournalBook}
 }
 
-export default useSearchMovement;
+export default useJournalBook;

@@ -16,6 +16,10 @@ const generateMajorAccountCode = (code, account_type) =>{
     case 'R-':
       code.rowCount !== 0 ? new_code = String(parseInt(code.rows[0].code)+100) : new_code = '40000'
       break;
+
+    case 'Pa':
+      code.rowCount !== 0 ? new_code = String(parseInt(code.rows[0].code)+100) : new_code = '50000'
+      break;
   }
   return new_code;
 }

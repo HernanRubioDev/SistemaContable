@@ -35,7 +35,7 @@ const accountValidator = (account)=>{
 
   const accountTypeValidation = (account_type)=>{
     const errors = {}
-    const types = ['A','P','R-','R+']
+    const types = ['A','P','R-','R+', 'Pa']
     switch (true) {
       case !types.includes(account_type):
         errors.message = "El tipo de cuenta no es válido."
