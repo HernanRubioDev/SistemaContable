@@ -6,7 +6,7 @@ import InfoModal from "../InfoModal";
 
 const JournalBook = ()=>{
 
-  const {dates, loading, movements, response, handleChange, handleReset, searchJournalBook} = useJournalBook();
+  const {dates, loading, movements, response, handleChange, searchJournalBook} = useJournalBook();
   return(
     <div className="d-flex flex-column align-items-center flex-grow-1 bg-secondary-subtle px-3 h-100">
       <div className="add-account-form bg-white d-flex flex-column col-lg-10 col-12 rounded-2 p-3 shadow gap-3 mt-2 overflow-hidden">

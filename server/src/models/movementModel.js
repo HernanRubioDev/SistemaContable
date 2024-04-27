@@ -28,7 +28,7 @@ const setMovement = async (movement) => {
 };
 
 const getMovement = async (dates)=>{
-  const {date_from, date_to} = dates
+  const {date_from, date_to, name} = dates
   const moveQuery = `SELECT 
   m.id_move,
   to_char(m.move_date, 'DD/MM/YYYY') AS move_date,
@@ -43,11 +43,11 @@ INNER JOIN
 INNER JOIN 
   accounts a ON a.id_account = l.id_account
 WHERE 
-  m.move_date BETWEEN $1 AND $2
+  m.move_date BETWEEN $1 AND $2 AND a.name LIKE $3
 GROUP BY 
   m.id_move, m.move_date, m.description;`
   try {
-    const res = await pool.query(moveQuery, [date_from, date_to])
+    const res = await pool.query(moveQuery, [date_from, date_to, `%${name}%`])
     return res
   } catch (error) {
     return null;

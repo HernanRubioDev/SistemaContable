@@ -2,7 +2,7 @@ import { default as SessionContext } from "@/context/SessionContext";
 import { useContext } from "react";
 import { default as useLogout } from "../users/useLogout";
 import { useState } from "react";
-import { getMovementByDates } from "@/services/movementService";
+import { getMovements } from "@/services/movementService";
 
 const useSearchMovement = ()=>{
   const initialDates = {
@@ -41,7 +41,7 @@ const useSearchMovement = ()=>{
     const {auth_token} = userSession
     const infoModal = new bootstrap.Modal(document.getElementById('infoModal'))
     try {
-      const res = await getMovementByDates(dates, auth_token);
+      const res = await getMovements(dates, auth_token);
       switch (true) {
         case res.status === 200:
           setMovements(res.movements);
@@ -74,6 +74,7 @@ const useSearchMovement = ()=>{
           break;
       }
     } catch (error) {
+      console.log(error)
       setResponse({title:"Error", message:"Se ha producido un error. Inténtelo más tarde.", success:false})
       infoToast.show()
     } finally {
