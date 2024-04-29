@@ -1,17 +1,8 @@
 import { useState } from "react";
 import LedgerTableRow from "./LedgerTableRow";
-import { useEffect } from "react";
 
-const LedgerBookTable = ({movements})=>{
+const LedgerBookTable = ({movements, accountForm, accounts})=>{
   const [total, setTotal] = useState(0)
-  useEffect(()=>{
-    if(movements.length !== 0){
-      
-    }
-  },[movements])
-
-  
-
   return(
     <div className="overflow-y-auto">
       <table className="table table-sm table-bordered table-striped text-center">
@@ -20,15 +11,16 @@ const LedgerBookTable = ({movements})=>{
           <th className="text-secondary-emphasis" scope="col">Descripción</th>
           <th className="text-secondary-emphasis" scope="col">Debe</th>
           <th className="text-secondary-emphasis" scope="col">Haber</th>
-          <th className="text-secondary-emphasis" scope="col">Saldo</th>
         </tr>
       </thead>
       <tbody>
-        {movements.map(move => <LedgerTableRow key={move.id_move} move={move} line={move.lines[0]}/>)}
+        {movements.map(move => <LedgerTableRow key={move.id_move} move={move} line={move.lines[0]} accountForm={accountForm} accounts={accounts} total={total} setTotal={setTotal}/>)}
+        {movements.length !== 0 &&
         <tr>
-          <td colSpan='3'>Total</td>
-          <td>{total}</td>
+          <td colSpan='1' className="bg-primary-subtle fw-semibold">Total</td>
+          <td colSpan="2" className="bg-primary-subtle fw-semibold">{<div className="d-flex justify-content-end"><p className="my-0 w-50">{total}</p></div>}</td>
         </tr>
+        }
       </tbody>
     </table>
   </div>

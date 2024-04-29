@@ -74,7 +74,6 @@ const useSearchMovement = ()=>{
           break;
       }
     } catch (error) {
-      console.log(error)
       setResponse({title:"Error", message:"Se ha producido un error. Inténtelo más tarde.", success:false})
       infoToast.show()
     } finally {

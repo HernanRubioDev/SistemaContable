@@ -1,5 +1,4 @@
 import LedgerBookTable from "./LedgerBookTable";
-import { useEffect } from "react";
 import useLedgerBook from "@/hooks/books/useLedgerBook";
 import InfoToast from "../InfoToast";
 import InfoModal from "../InfoModal";
@@ -7,9 +6,6 @@ import Loader from "../Loader";
 
 const LedgerBookForm = ()=>{
   const {accounts, loading, response, accountForm, movements, handleChange, handleSubmit, getAccounts} = useLedgerBook()
-  useEffect(()=>{
-    getAccounts()
-  },[])
 
   return(
     <>
@@ -38,7 +34,7 @@ const LedgerBookForm = ()=>{
                 <button type="submit" className="btn btn-sm btn-primary align-self-end d-flex justify-content-center col-12 col-lg-2 mt-2"><span className="material-symbols-outlined me-1">search</span>Buscar</button>
               </div>
           </form>
-          {loading ? <div className="d-flex justify-copntent-center"><Loader /></div> : <LedgerBookTable movements={movements}/>}
+          {loading ? <div className="d-flex justify-content-center"><Loader /></div> : <LedgerBookTable movements={movements} accountForm={accountForm} accounts={accounts}/>}
         </div>
       </div>
       <InfoToast content={response}/>

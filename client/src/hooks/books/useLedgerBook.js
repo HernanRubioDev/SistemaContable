@@ -3,6 +3,7 @@ import { default as useLogout } from "../users/useLogout";
 import { useContext, useState } from "react";
 import { getAccount } from "@/services/accountService";
 import { getMovements } from "@/services/movementService";
+import { useEffect } from "react";
 
 const useLedgerBook = ()=>{
   const initialForm = {
@@ -17,6 +18,12 @@ const useLedgerBook = ()=>{
   const [loading, setLoading] = useState(false)
   const {userSession} = useContext(SessionContext)
   const infoToast = new bootstrap.Toast(document.getElementById("infoToast"))
+
+  useEffect(()=>{
+    if(accounts.length === 0){
+      getAccounts()
+    }
+  },[])
 
   const handleChange = (e)=>{
     setAccountForm({

@@ -73,7 +73,6 @@ const editAccountName = async  (req, res)=>{
         break;
     
       default:
-        console.log("entro")
         res.status(500).json({status:500, message: "Se ha producido un error inesperado. Inténtelo mas tarde."});
         break;
     }
