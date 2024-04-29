@@ -1,19 +1,37 @@
 import {pool} from '../../db.cjs'
 
 const setMovement = async (movement) => {
+  const types = {
+    "debit": {
+      "A": "+", "P": "-", "R+": "-", "R-": "+", "Pa": "+"
+    },
+    "credit": {
+      "A": "-", "P": "+", "R+": "+", "R-": "-", "Pa": "-"
+    }
+  };
+
   const { movement_date, movement_description, lines } = movement;
   const client = await pool.connect();
   try {
+    
     await client.query('BEGIN');
 
     const addLineQuery = `INSERT INTO lines (id_account, move_type, line_amount) VALUES ((SELECT id_account FROM accounts WHERE name = $1), $2, $3) RETURNING id_line;`
     const addMoveQuery = `INSERT INTO moves (move_date, description) VALUES ($1, $2) RETURNING id_move`
     const addMoveLineQuery = `INSERT INTO moves_lines (id_move, id_line) VALUES ($1, $2)`
+    const incrementPartialCredit = `UPDATE accounts SET partial_credit = partial_credit + $1 WHERE name = $2`
+    const decrementPartialCredit = `UPDATE accounts SET partial_credit = partial_credit - $1 WHERE name = $2`
     
     const moveRes = await client.query(addMoveQuery, [movement_date, movement_description]);
     const linesPromises = lines.map(async (line) => {
       const lineRes = await client.query(addLineQuery, [line.account, line.type, line.amount]);
       await client.query(addMoveLineQuery, [moveRes.rows[0].id_move, lineRes.rows[0].id_line]);
+      if(types[line.type][line.account_type] === "+"){
+        await client.query(incrementPartialCredit, [line.amount, line.account])
+      }
+      else{
+        await client.query(decrementPartialCredit, [line.amount, line.account])
+      } 
       return lineRes;
     });
     const res = await Promise.all(linesPromises);
@@ -45,7 +63,9 @@ INNER JOIN
 WHERE 
   m.move_date BETWEEN $1 AND $2 AND a.name LIKE $3
 GROUP BY 
-  m.id_move, m.move_date, m.description;`
+  m.id_move, m.move_date, m.description
+ORDER BY 
+  m.id_move ASC;`
   try {
     const res = await pool.query(moveQuery, [date_from, date_to, `%${name}%`])
     return res

@@ -84,7 +84,6 @@ const pathAccountName = async (account)=>{
     const res = await pool.query(query, [name, id_account])
     return res
   } catch (error) {
-    console.log(error)
     return null
   }
 }

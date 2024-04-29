@@ -3,14 +3,16 @@ import SessionContext from "@/context/SessionContext";
 import useLogout from "../users/useLogout";
 import { getAccount } from "@/services/accountService";
 import { setNewMovement } from "@/services/movementService";
+import { useEffect } from "react";
 
 const useAddMovement = ()=>{
   const initialMovement = {
     movement_date: new Date().toISOString().slice(0, 10),
-    movement_amount:'',
-    movement_account:'',
-    movement_type:'debit',
-    movement_description:'',
+    movement_amount:"",
+    movement_account:"",
+    movement_type:"debit",
+    movement_description:"",
+    account_type:"",
     lines:[]
   }
   const [movement, setMovement] = useState(initialMovement)
@@ -21,13 +23,22 @@ const useAddMovement = ()=>{
   const {logOutUser} = useLogout()
   const {userSession} = useContext(SessionContext)
 
-  const handleChange = (e)=>{
+  useEffect(()=>{
+    if(accounts.length === 0) getAccounts()
+
+    if(movement.movement_account !== ""){
+      const selectedAccountType = accounts.find(acc => acc.name === movement.movement_account)
+      setMovement({...movement, ["account_type"]:selectedAccountType.account_type})
+    }
+  },[movement.movement_account])
+
+  const handleChange = (e) => {
     setMovement({
       ...movement,
-      [e.target.name]: e.target.value
-    })
-  }
-
+      [e.target.name]: e.target.value,
+    });
+  };
+  
   const getAccounts = async()=>{
     const infoModal = new bootstrap.Modal(document.getElementById('infoModal'))
     const {auth_token} = userSession
@@ -71,9 +82,10 @@ const useAddMovement = ()=>{
   }
 
   const addLine = (movement)=>{
+
     setMovement({
       ...movement,
-      lines: [...movement.lines, {account: movement.movement_account, type: movement.movement_type, amount: movement.movement_amount}]
+      lines: [...movement.lines, {account: movement.movement_account, type: movement.movement_type, amount: movement.movement_amount,  account_type: movement.account_type}]
     })
   }
 
@@ -120,7 +132,7 @@ const useAddMovement = ()=>{
     }
   }
 
-  return {movement, accounts, accountResponse, loading, handleChange, getAccounts, addLine, removeLine, createMovement}
+  return {movement, accounts, accountResponse, loading, setMovement, handleChange, getAccounts, addLine, removeLine, createMovement}
 }
 
 export default useAddMovement;

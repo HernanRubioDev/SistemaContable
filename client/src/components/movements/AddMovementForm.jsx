@@ -7,11 +7,8 @@ import { useEffect } from 'react';
 import Loader from '../Loader';
 
 const AddMovementForm = ()=>{
-  const {movement, accounts, accountResponse, loading, handleChange, getAccounts, createMovement, addLine, removeLine} = useAddMovement()
+  const {movement, accounts, accountResponse, loading, handleChange, createMovement, addLine, removeLine} = useAddMovement()
   const {movement_account, movement_amount, movement_description, lines} = movement
-  useEffect(()=>{
-    if(accounts.length === 0) getAccounts()
-  },[])
 
   return(
     <>
