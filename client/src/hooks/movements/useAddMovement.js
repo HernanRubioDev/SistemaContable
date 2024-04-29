@@ -66,7 +66,7 @@ const useAddMovement = ()=>{
           break;
       
         case res.status === 403:
-          setAccountResponse({title:"Error", message:res.message, status:false})
+          setAccountResponse({title:"Error", message:res.message, status:"danger"})
           infoModal.show()
           break;
           

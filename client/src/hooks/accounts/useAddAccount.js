@@ -30,12 +30,12 @@ const useAddAccount = ()=>{
           break;
 
         case res.status === 400:
-          setAccountResponse({title:"Error", message: res.message, success:false})
+          setAccountResponse({title:"Error", message: res.message, success: false})
           infoToast.show()
           break;
 
         case res.status === 403:
-          setAccountResponse({title:"Error", message: res.message, success:false})
+          setAccountResponse({title:"Error", message: res.message, status: false})
           infoToast.show()
           break;
       
@@ -79,7 +79,7 @@ const useAddAccount = ()=>{
           break;
       
         case res.status === 403:
-          setAccountResponse({title:"Error", message:res.message, status:false})
+          setAccountResponse({title:"Error", message:res.message, status:"danger"})
           infoModal.show()
           break;
           
@@ -114,6 +114,7 @@ const useAddAccount = ()=>{
   }
 
   const handleReset = ()=>{
+    setAccounts([])
     setNewAccount(initialAccount);
   }
 
