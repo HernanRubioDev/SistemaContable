@@ -13,7 +13,7 @@ import accountRouter from './routes/accounts.js';
 import movementRouter from './routes/movements.js';
 
 //MIDDLEWARES
-app.use(cors())
+app.use(cors("*"))
 app.use(express.json());
 
 //ROUTES
