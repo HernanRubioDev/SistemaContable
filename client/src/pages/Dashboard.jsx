@@ -5,7 +5,7 @@ import MenuWrapper from "@/components/menu/MenuWrapper";
 
 const Dashboard = ()=>{
   return(
-    <main className="vh-100 d-flex flex-wrap bg-body-secondary overflow-hidden">
+    <main className="vh-100 d-flex flex-grow-1 flex-wrap bg-body-secondary overflow-hidden overflow-auto">
       <Header />
       <MenuWrapper>
         <AccountingMenu />

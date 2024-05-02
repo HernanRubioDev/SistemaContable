@@ -46,7 +46,7 @@ const useLogin = ()=>{
       }
     } catch (error) {
       setLoginResponse({title: "Ups...", message:'Parece que ha ocurrindo un error. Inténtelo más tarde.', status:'danger'})
-      InfoToast.show()
+      infoModal.show()
     }finally{
       setLoginLoading(false)
     }
