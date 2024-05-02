@@ -3,7 +3,7 @@ import dotenv from 'dotenv'
 import cors from 'cors'
 
 dotenv.config();
-const PORT = process.env.PORT
+const PORT = process.env.PORT || 3000
 
 const app = express();
 
@@ -13,7 +13,7 @@ import accountRouter from './routes/accounts.js';
 import movementRouter from './routes/movements.js';
 
 //MIDDLEWARES
-app.use(cors({origin: true}))
+app.use(cors())
 app.use(express.json());
 
 //ROUTES
