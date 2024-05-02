@@ -5,7 +5,6 @@ const setAccount = async (account, auth_token)=>{
   const options = {
     method: 'POST',
     headers:{
-      "Access-Control-Allow-Origin": "*",
       "content-type":"application/json"
     },
     body: JSON.stringify(account)

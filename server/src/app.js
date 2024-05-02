@@ -14,10 +14,7 @@ import movementRouter from './routes/movements.js';
 
 //MIDDLEWARES
 app.use(express.json());
-app.use(cors({
-  credentials: true,
-  origin: true
-}));
+app.use(cors({origin: 'https://contac-p49x.onrender.com'}));
 
 //ROUTES
 app.use("/users", userRouter);
