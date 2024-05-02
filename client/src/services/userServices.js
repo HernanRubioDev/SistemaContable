@@ -1,5 +1,7 @@
+const API = import.meta.env.VITE_API;
+
 const setLogin = async(user)=>{
-  const API_URL = "http://localhost:3000/users/login"
+  const LOGIN_ENDPOINT = `${API}/users/login`
   
   const options = {
     method:'POST',
@@ -10,7 +12,7 @@ const setLogin = async(user)=>{
   }
 
   try {
-    const res = await fetch(API_URL, options).then(res => res.json());
+    const res = await fetch(LOGIN_ENDPOINT, options).then(res => res.json());
     return res
   } catch (error) {
     return null;
@@ -18,7 +20,7 @@ const setLogin = async(user)=>{
 }
 
 const setRegister = async(user) =>{
-  const API_URL = "http://localhost:3000/users/register"
+  const REGISTER_ENDPOINT = `${API}/users/register`
   const options = {
     method:'POST',
     headers:{
@@ -27,7 +29,7 @@ const setRegister = async(user) =>{
     body:JSON.stringify(user),
   }
   try {
-    const res = await fetch(API_URL, options).then(res => res.json());
+    const res = await fetch(REGISTER_ENDPOINT, options).then(res => res.json());
     return res
   } catch (error) {
     return null

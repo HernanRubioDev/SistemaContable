@@ -38,3 +38,11 @@ background-color: #dbdfe2;
 .open-menu-btn{
   font-size: 2.3rem;
 }
+
+.dropdown-option:hover{
+  background-color: #f7f7f7;
+}
+
+.brand-letter{
+  color: #4bb4f1;
+}

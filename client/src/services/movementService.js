@@ -1,5 +1,7 @@
+const API = import.meta.env.VITE_API;
+
 const setNewMovement = async (movement, auth_token)=>{
-  const API_URL = `http://localhost:3000/movements/${auth_token}`
+  const API_URL = `${API}/movements/${auth_token}`
   const options = {
     method: 'POST',
     headers:{
@@ -17,7 +19,7 @@ const setNewMovement = async (movement, auth_token)=>{
 
 const getMovements = async(data, auth_token)=>{
   const {date_from, date_to, name} = data
-  const API_URL = `http://localhost:3000/movements/${auth_token}/?date_from=${date_from}&date_to=${date_to}&name=${name||""}`
+  const API_URL = `${API}/movements/${auth_token}/?date_from=${date_from}&date_to=${date_to}&name=${name||""}`
   const options = {
     method: 'GET',
     headers:{

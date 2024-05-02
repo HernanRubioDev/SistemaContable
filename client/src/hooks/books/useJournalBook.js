@@ -39,6 +39,7 @@ const useJournalBook = ()=>{
       switch (true) {
         case res.status === 200:
           setMovements(res.movements);
+          infoToast.hide()
           break;
 
         case res.status === 404:

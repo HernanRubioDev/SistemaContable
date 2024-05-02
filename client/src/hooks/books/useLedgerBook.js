@@ -23,23 +23,16 @@ const useLedgerBook = ()=>{
     if(accounts.length === 0){
       getAccounts()
     }
-  },[])
+    if(accountForm.name){
+      searchMovement(accountForm)
+    }
+  },[accountForm])
 
   const handleChange = (e)=>{
     setAccountForm({
       ...accountForm,
       [e.target.name]: e.target.value
     })
-  }
-
-  const handleSubmit = (e, accountForm)=>{
-    e.preventDefault()
-    if(accountForm.name === ""){
-      setAccountResponse({title:"Error", message:"Debe seleccionar una cuenta.", success:false})
-      infoToast.show()
-      return
-    }
-    searchMovement(accountForm)
   }
 
   const getAccounts = async()=>{
@@ -93,6 +86,7 @@ const useLedgerBook = ()=>{
       const res = await getMovements(accountForm, auth_token, account);
       switch (true) {
         case res.status === 200:
+          infoToast.hide()
           setMovements(res.movements);
           break;
 
@@ -130,7 +124,7 @@ const useLedgerBook = ()=>{
     }
   }
 
-  return {accounts, loading, response, accountForm, movements, handleChange, handleSubmit, getAccounts}
+  return {accounts, loading, response, accountForm, movements, handleChange, getAccounts}
 }
 
 export default useLedgerBook;

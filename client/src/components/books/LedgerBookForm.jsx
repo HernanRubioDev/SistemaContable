@@ -5,7 +5,7 @@ import InfoModal from "../InfoModal";
 import Loader from "../Loader";
 
 const LedgerBookForm = ()=>{
-  const {accounts, loading, response, accountForm, movements, handleChange, handleSubmit, getAccounts} = useLedgerBook()
+  const {accounts, loading, response, accountForm, movements, handleChange} = useLedgerBook()
 
   return(
     <>
@@ -14,7 +14,7 @@ const LedgerBookForm = ()=>{
           <div className="w-100">
             <h3 className="text-secondary fw-bold text-body-tertiary fs-5 m-0">Libro Mayor</h3>
           </div>
-          <form onSubmit={(e)=>handleSubmit(e, accountForm)} className="d-flex flex-wrap gap-2">
+          <form className="d-flex flex-wrap gap-2">
               <div className="d-flex flex-grow-1 flex-column">
                 <label htmlFor="account" className="form-label text-secondary fw-semibold m-0">Cuenta</label>
                 <select onChange={(e)=>handleChange(e)} className="form-select" id="account" aria-label="Default select example" name="name" value={accountForm.name}>
@@ -29,9 +29,6 @@ const LedgerBookForm = ()=>{
               <div className="d-flex flex-grow-1 flex-column">
                 <label htmlFor="dateTo" className="form-label text-secondary fw-semibold m-0">Hasta</label>
                 <input onChange={(e)=>handleChange(e)} type="date" className="form-control" id="dateTo" placeholder="Ej: Banco Río" name="date_to" value={accountForm.date_to} max={new Date().toISOString().slice(0, 10)}/>
-              </div>
-              <div className="w-100 d-flex justify-content-end">
-                <button type="submit" className="btn btn-sm btn-primary align-self-end d-flex justify-content-center col-12 col-lg-2 mt-2"><span className="material-symbols-outlined me-1">search</span>Buscar</button>
               </div>
           </form>
           {loading ? <div className="d-flex justify-content-center"><Loader /></div> : <LedgerBookTable movements={movements} accountForm={accountForm} accounts={accounts}/>}

@@ -1,5 +1,7 @@
+const API = import.meta.env.VITE_API;
+
 const setAccount = async (account, auth_token)=>{
-  const API_URL = `http://localhost:3000/accounts/${auth_token}`
+  const API_URL = `${API}/accounts/${auth_token}`
   const options = {
     method: 'POST',
     headers:{
@@ -17,7 +19,7 @@ const setAccount = async (account, auth_token)=>{
 
 const getAccount = async (account, auth_token)=>{
   let {name, date_from, date_to, account_type, recive_credit} = account
-  const API_URL = `http://localhost:3000/accounts/${auth_token}/?name=${name}&date_from=${date_from}&date_to=${date_to}&account_type=${encodeURIComponent(account_type)}&recive_credit=${recive_credit}`
+  const API_URL = `${API}/accounts/${auth_token}/?name=${name}&date_from=${date_from}&date_to=${date_to}&account_type=${encodeURIComponent(account_type)}&recive_credit=${recive_credit}`
   const options = {
     method: 'GET',
     headers:{
@@ -33,7 +35,7 @@ const getAccount = async (account, auth_token)=>{
 }
 
 const deleteAccount = async (account, auth_token)=>{
-  const API_URL = `http://localhost:3000/accounts/${auth_token}`
+  const API_URL = `${API}/accounts/${auth_token}`
   const options = {
     method: 'DELETE',
     headers:{
@@ -50,7 +52,7 @@ const deleteAccount = async (account, auth_token)=>{
 }
 
 const patchAccount = async(account, auth_token)=>{
-  const API_URL = `http://localhost:3000/accounts/${auth_token}`
+  const API_URL = `${API}/accounts/${auth_token}`
   const options = {
     method: 'PATCH',
     headers:{
