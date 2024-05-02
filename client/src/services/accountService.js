@@ -5,6 +5,7 @@ const setAccount = async (account, auth_token)=>{
   const options = {
     method: 'POST',
     headers:{
+      "Access-Control-Allow-Origin": "*",
       "content-type":"application/json"
     },
     body: JSON.stringify(account)
@@ -39,7 +40,7 @@ const deleteAccount = async (account, auth_token)=>{
   const options = {
     method: 'DELETE',
     headers:{
-      "content-type":"application/json"
+      "content-type":"application/json",
     },
     body: JSON.stringify(account)
   }
