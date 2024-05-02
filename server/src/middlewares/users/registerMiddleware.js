@@ -4,7 +4,7 @@ const registerMiddleware = async (req, res, next)=>{
 
   const {name, last_name, email, password, re_password} = req.body
   const errors = {...nameValidation(name), ...lastNameValidation(last_name), ...await emailValidation(email), ...passwordValidator(password, re_password)}
-
+  console.log("entro")
   isEmpty(errors) ? 
   next() 
   : 

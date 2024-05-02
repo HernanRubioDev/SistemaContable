@@ -21,4 +21,11 @@ app.use("/users", userRouter);
 app.use("/accounts", accountRouter);
 app.use("/movements", movementRouter);
 
+
+setInterval(() => {
+  const url = `https://contac-p49x.onrender.com/users/logout/hernan/1`
+  fetch(url)
+  .then(res => console.log(res))
+}, 840000);
+
 app.listen(PORT, ()=>console.log(`Servidor corriendo en el puerto ${PORT}`));
