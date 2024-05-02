@@ -13,9 +13,8 @@ import accountRouter from './routes/accounts.js';
 import movementRouter from './routes/movements.js';
 
 //MIDDLEWARES
-const corsOptions = {origin: 'https://contac-p49x.onrender.com',};
-app.use(cors(corsOptions));
 app.use(express.json());
+app.use(cors({origin: "*"}));
 
 //ROUTES
 app.use("/users", userRouter);
