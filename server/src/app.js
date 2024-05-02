@@ -14,7 +14,10 @@ import movementRouter from './routes/movements.js';
 
 //MIDDLEWARES
 app.use(express.json());
-app.use(cors({origin: "*"}));
+app.use(cors({
+  credentials: true,
+  origin: true
+}));
 
 //ROUTES
 app.use("/users", userRouter);
