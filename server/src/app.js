@@ -7,6 +7,7 @@ const PORT = process.env.PORT || 3000
 
 const app = express();
 
+
 //ROUTES
 import userRouter from './routes/users.js';
 import accountRouter from './routes/accounts.js';
@@ -14,7 +15,11 @@ import movementRouter from './routes/movements.js';
 
 //MIDDLEWARES
 app.use(express.json());
-app.use(cors({origin: 'http://contac-p49x.onrender.com'}));
+app.use(cors({
+  origin: 'https://con-tac.onrender.com',
+  allowedHeaders: true,
+}
+));
 
 //ROUTES
 app.use("/users", userRouter);
