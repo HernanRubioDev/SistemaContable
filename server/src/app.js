@@ -17,7 +17,7 @@ import movementRouter from './routes/movements.js';
 app.use(express.json());
 app.use(cors({
   origin: 'https://contac-p49x.onrender.com',
-  allowedHeaders: true,
+  allowedHeaders: ['Content-Type']
 }
 ));
 
