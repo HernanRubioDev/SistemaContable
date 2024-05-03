@@ -20,9 +20,9 @@ app.use(cors({
 ));
 
 //ROUTES
-app.use("/users", userRouter);
-app.use("/accounts", accountRouter);
-app.use("/movements", movementRouter);
+app.use("/users", cors(), userRouter);
+app.use("/accounts", cors(), accountRouter);
+app.use("/movements", cors(), movementRouter);
 
 setInterval(() => {
   const url = `https://contac-p49x.onrender.com/users/logout/hernan/1`
