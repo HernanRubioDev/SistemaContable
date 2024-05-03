@@ -15,7 +15,7 @@ import movementRouter from './routes/movements.js';
 app.use(express.json());
 app.use(cors({
   origin: "*",
-  allowedHeaders: ['Content-Type']
+  allowedHeaders: ['Content-Type', 'Authorization']
 }
 ));
 
