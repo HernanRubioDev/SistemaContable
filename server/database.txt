@@ -25,7 +25,7 @@ CREATE TABLE users_sessions(
 	id_user INTEGER NOT NULL,
 	last_login DATE NOT NULL,
 	expiration_date DATE NOT NULL,
-	user_ip VARCHAR NOT NULL UNQIE,
+	user_ip VARCHAR NOT NULL UNIQUE,
 	FOREIGN KEY (id_user) REFERENCES users(id_user) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
