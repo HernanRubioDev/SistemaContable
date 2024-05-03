@@ -3,7 +3,7 @@ const API = import.meta.env.VITE_API;
 const setAccount = async (account, auth_token)=>{
   const API_URL = `${API}/accounts/${auth_token}`
   const options = {
-    mode:  'cors',
+    mode:  'no-cors',
     method: 'POST',
     headers:{
       "content-type":"application/json",
