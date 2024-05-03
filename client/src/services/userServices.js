@@ -6,7 +6,7 @@ const setLogin = async(user)=>{
   const options = {
     method:'POST',
     headers:{
-      "content-type":"application/json"
+      "Content-Type": "application/json"
     },
     body:JSON.stringify(user),
   }
@@ -24,7 +24,7 @@ const setRegister = async(user) =>{
   const options = {
     method:'POST',
     headers:{
-      "content-type":"application/json"
+      "Content-Type": "application/json"
     },
     body:JSON.stringify(user),
   }

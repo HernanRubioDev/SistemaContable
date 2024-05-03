@@ -5,7 +5,7 @@ const setAccount = async (account, auth_token)=>{
   const options = {
     method: 'POST',
     headers:{
-      "content-type":"application/json"
+      "Content-Type": "application/json"
     },
     body: JSON.stringify(account)
   }
@@ -23,7 +23,7 @@ const getAccount = async (account, auth_token)=>{
   const options = {
     method: 'GET',
     headers:{
-      "content-type":"application/json"
+      "Content-Type": "application/json"
     }
   }
   try {
@@ -39,7 +39,7 @@ const deleteAccount = async (account, auth_token)=>{
   const options = {
     method: 'DELETE',
     headers:{
-      "content-type":"application/json",
+      "Content-Type": "application/json",
     },
     body: JSON.stringify(account)
   }
@@ -56,7 +56,7 @@ const patchAccount = async(account, auth_token)=>{
   const options = {
     method: 'PATCH',
     headers:{
-      "content-type":"application/json"
+      "Content-Type": "application/json"
     },
     body: JSON.stringify(account)
   }

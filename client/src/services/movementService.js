@@ -5,7 +5,7 @@ const setNewMovement = async (movement, auth_token)=>{
   const options = {
     method: 'POST',
     headers:{
-      "content-type":"application/json"
+      "Content-Type": "application/json"
     },
     body: JSON.stringify(movement)
   }
@@ -23,7 +23,7 @@ const getMovements = async(data, auth_token)=>{
   const options = {
     method: 'GET',
     headers:{
-      "content-type":"application/json"
+      "Content-Type": "application/json"
     }
   }
   try {
