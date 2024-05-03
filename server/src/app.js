@@ -14,13 +14,12 @@ import movementRouter from './routes/movements.js';
 
 //MIDDLEWARES
 app.use(express.json());
-app.use(cors({origin: 'https://contac-p49x.onrender.com'}));
+app.use(cors({origin: 'http://contac-p49x.onrender.com'}));
 
 //ROUTES
 app.use("/users", userRouter);
 app.use("/accounts", accountRouter);
 app.use("/movements", movementRouter);
-
 
 setInterval(() => {
   const url = `https://contac-p49x.onrender.com/users/logout/hernan/1`
