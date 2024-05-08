@@ -1,6 +1,6 @@
 import express from 'express';
 import dotenv from 'dotenv'
-const cors = require('cors');
+import cors from 'cors'
 
 dotenv.config();
 const PORT = process.env.PORT || 4000
