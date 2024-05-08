@@ -12,17 +12,17 @@ import accountRouter from './routes/accounts.js';
 import movementRouter from './routes/movements.js';
 
 //MIDDLEWARES
-app.use(cors({origin: true}))
+app.use(cors())
 app.use(express.json());
 
 //ROUTES
 app.use("/users", cors(), userRouter);
 app.use("/accounts", cors(), accountRouter);
 app.use("/movements", cors(), movementRouter);
-app.use("/healt", (req, res) => res.status(200).json({message:"Server up"}))
+app.use("/health", (req, res) => res.status(200).json({message:"Server up"}))
 
 setInterval(() => {
-  const url = `https://con-tac.onrender.com/healt`
+  const url = `https://con-tac.onrender.com/health`
   fetch(url)
   .then(res => console.log(res))
 }, 840000);
