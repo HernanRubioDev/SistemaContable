@@ -3,7 +3,7 @@ import dotenv from 'dotenv'
 const cors = require('cors');
 
 dotenv.config();
-const PORT = process.env.PORT || 3001
+const PORT = process.env.PORT || 4000
 const app = express();
 
 //ROUTES
