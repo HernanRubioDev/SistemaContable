@@ -12,7 +12,10 @@ import accountRouter from './routes/accounts.js';
 import movementRouter from './routes/movements.js';
 
 //MIDDLEWARES
-app.use(cors())
+app.use(cors({
+  origin: 'https://contac-p49x.onrender.com', // Especifica el origen permitido
+  allowedHeaders: ['Content-Type'] // Especifica las cabeceras permitidas
+}));
 app.use(express.json());
 
 //ROUTES
