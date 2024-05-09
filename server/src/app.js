@@ -3,7 +3,7 @@ import dotenv from 'dotenv'
 import cors from 'cors'
 
 dotenv.config();
-const PORT = process.env.PORT || 4000
+const PORT = process.env.PORT || 3000
 const app = express();
 
 //ROUTES
@@ -12,10 +12,7 @@ import accountRouter from './routes/accounts.js';
 import movementRouter from './routes/movements.js';
 
 //MIDDLEWARES
-app.use(cors({
-  origin: 'https://contac-p49x.onrender.com', // Especifica el origen permitido
-  allowedHeaders: ['Content-Type'] // Especifica las cabeceras permitidas
-}));
+app.use(cors());
 app.use(express.json());
 
 //ROUTES

@@ -34,4 +34,21 @@ const getMovements = async(data, auth_token)=>{
   }
 }
 
-export {setNewMovement, getMovements}
+const getMovementsByAccounts = async(auth_token, accounts) => {
+  const {positive_account, negative_account} = accounts
+  const API_URL = `${API}/movements/${auth_token}/${positive_account}/${negative_account}`
+  const options = {
+    method: 'GET',
+    headers:{
+      "Content-Type": "application/json"
+    }
+  }
+  try {
+    const res = await fetch(API_URL, options).then(res => res.json());
+    return res
+  } catch (error) {
+    return null
+  }
+}
+
+export {setNewMovement, getMovements, getMovementsByAccounts}

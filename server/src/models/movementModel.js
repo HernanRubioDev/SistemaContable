@@ -84,4 +84,34 @@ const getMovementsCountByAccountId = async (id_account)=>{
   }
 }
 
-export {setMovement, getMovement, getMovementsCountByAccountId}
+const getAmountsSumByAccounts = async (positive_account, negative_account) =>{
+  const query = `SELECT
+  TO_CHAR(DATE_TRUNC('month', m.move_date), 'TMMonth') AS month,
+  SUM(CASE WHEN a.account_type= 'R+' AND l.move_type='credit' THEN l.line_amount ELSE 0 END) AS r_plus_total,
+  SUM(CASE WHEN a.account_type= 'R-' AND l.move_type='debit' THEN l.line_amount ELSE 0 END) AS r_minus_total
+FROM
+  moves m
+JOIN
+  moves_lines ml ON m.id_move = ml.id_move
+JOIN
+  lines l ON ml.id_line = l.id_line
+JOIN
+  accounts a ON l.id_account = a.id_account
+WHERE
+  (a.name = $1 AND a.account_type= 'R+') OR
+  (a.name = $2 AND a.account_type= 'R-') AND
+  m.move_date >= DATE_TRUNC('month', CURRENT_DATE) - INTERVAL '6 months' AND
+  m.move_date < DATE_TRUNC('month', CURRENT_DATE) + INTERVAL '1 month'
+GROUP BY
+  DATE_TRUNC('month', m.move_date)
+ORDER BY
+  month;`
+  try {
+    const res = await pool.query(query,[positive_account, negative_account])
+    return res
+  } catch (error) {
+    return null 
+  }
+}
+
+export {setMovement, getMovement, getMovementsCountByAccountId, getAmountsSumByAccounts}
