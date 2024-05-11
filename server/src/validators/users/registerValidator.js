@@ -56,6 +56,7 @@ import { getUserByEmail } from "../../models/userModel.js";
     const errors = {}
     const emailRegEx = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
     const emailCheck = await getUserByEmail(email);
+    console.log(emailCheck)
     switch (true) {
       case !email:
         errors.email = "El campo 'Email' es obligatorio."
