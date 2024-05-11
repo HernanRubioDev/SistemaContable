@@ -22,7 +22,7 @@ app.use("/movements", cors(), movementRouter);
 app.use("/health", (req, res) => res.status(200).json({message:"Server up"}))
 
 setInterval(() => {
-  const url = `https://con-tac.onrender.com/health`
+  const url = `https://sistema-contable-back.onrender.com/health`
   fetch(url)
   .then(res => console.log(res))
 }, 840000);
