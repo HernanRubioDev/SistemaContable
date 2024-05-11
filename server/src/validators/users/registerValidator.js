@@ -72,14 +72,11 @@ import { getUserByEmail } from "../../models/userModel.js";
         errors.status = 400;
         break;
 
-      case emailCheck.rowCount !== 0:
+      case emailCheck.rowCount && emailCheck.rowCount !== 0:
         errors.email = "Este email ya está en uso."
         errors.status = 409;
         break;
 
-      default:
-        delete errors.email
-        break;
     }
     return errors;
   }

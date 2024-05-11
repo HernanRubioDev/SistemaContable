@@ -20,25 +20,6 @@ const BarChart = ({loading, accounts, movements, accountsForm, handleChange})=>{
       }
     }, [movements]);
 
-    const chartOptions = {
-      backgroundColor: '#e2e3e5',
-      chartArea: {
-        backgroundColor: 'white',
-        width: '100%',
-        height: '100%'
-      },
-      hAxis: {
-        textPosition: 'in',
-      },
-      vAxis: {
-        textPosition: 'in',
-        minValue: 0,
-      },
-      titlePosition: 'in',
-      legend: {
-        position: 'in',
-      },
-    };
   return(
     <div className="d-flex flex-column flex-grow-1 gap-2 rounded p-3 bg-white shadow-sm h-50">
       <div className="d-flex gap-3">
@@ -52,8 +33,7 @@ const BarChart = ({loading, accounts, movements, accountsForm, handleChange})=>{
         data={data}
         width="100%"
         height="100%"
-        legendToggle
-        options={chartOptions} />
+        legendToggle />
       }
     </div>
 )
