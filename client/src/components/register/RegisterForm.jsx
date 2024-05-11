@@ -6,7 +6,7 @@ const RegisterForm = ({user, registerErrors, registerLoading, handleChange, hand
     <div className="col-12 col-lg-9 d-flex rounded-3 h-75 shadow">
       <div className="d-none d-lg-flex flex-column justify-content-center col-6 bg-body-secondary rounded-start-3">
         <h1 className="text-center text-light-emphasis fw-bold fs-1">¡Regístrate!</h1>
-        <img className='col-6 align-self-center' src='/images/login-background.svg' />
+        <img className='col-6 align-self-center' src='/images/login-background.svg' alt="Logo para formulario de registrio."/>
         <p className='text-light-emphasis text-center fw-semibold'>¡Lleva tus finanzas de una manera facil y rápida!</p>
       </div>
       <form onSubmit={(e)=>{handleSubmit(e)}} className="d-flex flex-column justify-content-center col-12 col-lg-6 px-4 py-4 rounded-end-3 bg-white">
