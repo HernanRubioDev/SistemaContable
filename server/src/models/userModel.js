@@ -106,7 +106,7 @@ const deleteUserAuth = async(auth_token, user_ip) =>{
 }
 
 const getUserByEmail = async (email)=>{
-  const getEmailQuery = `SELECT  u.id_user, u.name, u.last_name, u.email, u.password, JSON_AGG(r.rol_name) AS roles FROM users u
+  const getEmailQuery = `SELECT u.id_user, u.name, u.last_name, u.email, u.password, JSON_AGG(r.rol_name) AS roles FROM users u
     JOIN users_roles ur ON u.id_user = ur.id_user
     JOIN roles r ON ur.id_rol = r.id_rol
     WHERE 
