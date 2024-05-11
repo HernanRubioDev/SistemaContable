@@ -33,7 +33,7 @@ const BarChart = ({loading, accounts, movements, accountsForm, handleChange})=>{
         data={data}
         width="100%"
         height="100%"
-        legendToggle />
+      />
       }
     </div>
 )
