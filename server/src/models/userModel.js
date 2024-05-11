@@ -116,6 +116,7 @@ const getUserByEmail = async (email)=>{
 
   try {
     const getEmailRes = await pool.query(getEmailQuery, [email]);
+    console.log(getEmailRes)
     return getEmailRes
   } catch (error) {
     return null;
