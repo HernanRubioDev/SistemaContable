@@ -23,5 +23,6 @@
     "uuid": "^9.0.1"
   },
   "type": "module",
-  "esModuleInterop": true
+  "esModuleInterop": true,
+  "packageManager": "pnpm@9.1.2"
 }
