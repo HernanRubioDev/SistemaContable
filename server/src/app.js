@@ -21,10 +21,4 @@ app.use("/accounts", cors(), accountRouter);
 app.use("/movements", cors(), movementRouter);
 app.use("/health", (req, res) => res.status(200).json({message:"Server up"}))
 
-setInterval(() => {
-  const url = `https://sistema-contable-hernanrubiodev-434cb79a.koyeb.app/health`
-  fetch(url)
-  .then(res => console.log(res))
-}, 840000);
-
 app.listen(PORT, ()=>console.log(`Servidor corriendo en el puerto ${PORT}`));
